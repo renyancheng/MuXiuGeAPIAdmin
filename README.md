@@ -14,7 +14,7 @@
 + 接口调用统计
 等等等...更多功能等你来探索！
 
-##Demo
+## Demo 
 [api.mwind.top](https://api.mwind.top)
 
 ## 用到的技术
@@ -24,7 +24,7 @@
 + SweetAlert.js
 + ClipBoard.js
 + HighLight.js
-+ Smooth-Scroll,polyfills.js
++ Smooth-Scroll.polyfills.js
 + Chart.js
 
 ## 联系方式
