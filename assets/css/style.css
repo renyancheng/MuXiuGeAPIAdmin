@@ -1,0 +1,160 @@
+.texto {
+	width:50%;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+#menu .mdui-list-item,.mdui-collapse-item-header {
+	border-radius:0px 50px 50px 0px;
+}
+#categorys .mdui-list-item,.mdui-collapse-item-header {
+	border-radius:0px 50px 50px 0px;
+}
+.mdui-dialog {
+	border-radius:7px;
+}
+.mdui-appbar {
+	box-shadow:0 1px 6px 0 rgba(32,33,36,.28);
+}
+#menu .mdui-list-item-content {
+	font-size:unset
+}
+#categorys .mdui-list-item-content {
+	font-size:unset
+}
+.mdui-main-text {
+	color:rgb(27,116,232);
+}
+
+.mdui-card{
+	border-radius:15px 15px 15px 15px;
+}
+.mdui-typo pre{
+	border-radius:10px;
+}
+
+.mdui-table-fluid{
+	border-radius:10px;
+}
+
+.mdui-badge{
+	display: inline;
+	position: relative;
+	border-radius: 4px;
+	text-shadow: none;
+	text-align: center;
+	font-size: 8px;
+	color: #FFFFFF;
+	vertical-align: center;
+	height: 100%;
+	top: -3px;
+	padding-top: 4px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.doc-toc {
+	margin: 0px 0 0 0;
+	font-size: 16px;
+	position: relative;
+	border-left: 3px solid;
+}
+
+@media (prefers-color-scheme: dark) {
+	
+}
+
+.doc-toc a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.doc-toc:before {
+	content: 'Content';
+	font-size: 15px;
+	line-height: 16px;
+	font-weight: 400;
+}
+
+.doc-toc ul,
+.doc-toc:before {
+	padding-left: 16px;
+}
+
+.doc-toc ul {
+	list-style: none;
+	margin: 0;
+}
+
+.doc-toc ul li {
+	margin: 1em 0;
+}
+
+.doc-toc ul li:first-child {
+	margin-top: 0;
+}
+
+.doc-toc ul li:last-child {
+	margin-bottom: 0;
+}
+
+.doc-toc ul li ul {
+	margin: 1em 0;
+	font-size: 0.83em;
+}
+
+.doc-toc > ul {
+	margin-top: 1em;
+}
+
+@media (min-width: 480px) {
+	.doc-toc {
+		margin-top: 0px;
+		font-size: 17px;
+		border-left-width: 4px;
+	}
+
+	.doc-toc ul,
+  	.doc-toc:before {
+		padding-left: 18px;
+	}
+}
+
+@media (min-width: 840px) {
+	.doc-toc {
+		margin-top: 0px;
+		font-size: 18px;
+		border-left-width: 5px;
+	}
+
+	.doc-toc ul,
+  	.doc-toc:before {
+		padding-left: 20px;
+	}
+}
+
+.mdui-card-header-avatar{
+    border-radius: 5px;
+}
+
+.doc-color-circle {
+  	display: inline-block;
+  	width: 12px;
+  	height: 12px;
+  	border-radius: 50%;
+}
+
+.mdui-editor {
+	width: auto;
+  	height: 500px;
+  	margin: 20px auto;
+}
+.mdui-editor-toolbar,
+.mdui-editor-content {
+  	border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mdui-editor-content {
+  	border-top: none;
+}
