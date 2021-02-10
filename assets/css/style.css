@@ -1,0 +1,508 @@
+.texto {
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#menu .mdui-list-item,
+.mdui-collapse-item-header {
+    border-radius: 0px 50px 50px 0px;
+}
+
+#categorys .mdui-list-item,
+.mdui-collapse-item-header {
+    border-radius: 0px 50px 50px 0px;
+}
+
+.mdui-dialog {
+    border-radius: 7px;
+}
+
+.mdui-appbar {
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+}
+
+#menu .mdui-list-item-content {
+    font-size: unset
+}
+
+#categorys .mdui-list-item-content {
+    font-size: unset
+}
+
+.mdui-main-text {
+    color: rgb(27, 116, 232);
+}
+
+.mdui-card {
+    border-radius: 15px 15px 15px 15px;
+}
+
+.mdui-typo pre {
+    border-radius: 10px;
+}
+
+.mdui-table-fluid {
+    border-radius: 10px;
+}
+
+.mdui-badge {
+    display: inline;
+    position: relative;
+    border-radius: 4px;
+    text-shadow: none;
+    text-align: center;
+    font-size: 8px;
+    color: #FFFFFF;
+    vertical-align: center;
+    height: 100%;
+    top: -3px;
+    padding-top: 4px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.doc-toc {
+    margin: 0px 0 0 0;
+    font-size: 16px;
+    position: relative;
+    border-left: 3px solid;
+}
+
+.mc-drawer .copyright {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 16px
+}
+
+.mc-drawer .copyright p {
+    margin: 0;
+    overflow: hidden;
+    color: rgba(0, 0, 0, .38);
+    font-size: 13px;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.mdui-theme-layout-dark .mc-drawer .copyright p {
+    color: hsla(0, 0%, 100%, .38)
+}
+
+.mc-drawer .copyright a {
+    color: rgba(0, 0, 0, .52);
+    text-decoration: none
+}
+
+.mdui-theme-layout-dark .mc-drawer .copyright a {
+    color: hsla(0, 0%, 100%, .52)
+}
+
+.mc-drawer .copyright a:hover {
+    text-decoration: underline
+}
+
+@media (prefers-color-scheme: dark) {}
+
+.doc-toc a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.doc-toc:before {
+    content: 'Content';
+    font-size: 15px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+.doc-toc ul,
+.doc-toc:before {
+    padding-left: 16px;
+}
+
+.doc-toc ul {
+    list-style: none;
+    margin: 0;
+}
+
+.doc-toc ul li {
+    margin: 1em 0;
+}
+
+.doc-toc ul li:first-child {
+    margin-top: 0;
+}
+
+.doc-toc ul li:last-child {
+    margin-bottom: 0;
+}
+
+.doc-toc ul li ul {
+    margin: 1em 0;
+    font-size: 0.83em;
+}
+
+.doc-toc>ul {
+    margin-top: 1em;
+}
+
+@media (min-width: 480px) {
+    .doc-toc {
+        margin-top: 0px;
+        font-size: 17px;
+        border-left-width: 4px;
+    }
+    .doc-toc ul,
+    .doc-toc:before {
+        padding-left: 18px;
+    }
+}
+
+@media (min-width: 840px) {
+    .doc-toc {
+        margin-top: 0px;
+        font-size: 18px;
+        border-left-width: 5px;
+    }
+    .doc-toc ul,
+    .doc-toc:before {
+        padding-left: 20px;
+    }
+}
+
+.mdui-card-header-avatar {
+    border-radius: 5px;
+}
+
+.doc-color-circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+#about {
+    max-width: 846px;
+    padding-top: 0
+}
+
+.user {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.user .cover {
+    position: relative;
+    box-sizing: border-box;
+    height: 0;
+    padding-bottom: 56%;
+    overflow: visible;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover
+}
+
+.user .cover .mc-cover-upload {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: none
+}
+
+.user .cover:hover .mc-cover-upload {
+    display: block
+}
+
+.user .info {
+    position: relative;
+    display: flex;
+    padding: 20px 24px 20px 20px
+}
+
+.user .info .avatar-box {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    min-width: 110px;
+    height: 110px;
+    background-color: rgba(0, 0, 0, .06);
+    border-radius: 50%
+}
+
+.mdui-theme-layout-dark .user .info .avatar-box {
+    background-color: hsla(0, 0%, 100%, .06)
+}
+
+.user .info .avatar-box .avatar {
+    width: 102px;
+    height: 102px;
+    border-radius: 50%;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.user .info .avatar-box .mc-avatar-upload {
+    display: none
+}
+
+.user .info .avatar-box:hover .mc-avatar-upload {
+    display: block
+}
+
+.user .info .profile {
+    padding-left: 32px
+}
+
+.user .info .profile .meta {
+    display: block;
+    align-items: center;
+    padding-left: 30px;
+    line-height: 22px
+}
+
+.user .info .profile .meta+.meta {
+    margin-top: 8px
+}
+
+.user .info .profile .meta i {
+    float: left;
+    margin-left: -30px;
+    padding-top: 2px;
+    font-size: 18px
+}
+
+.user .info .profile .username {
+    padding-top: 8px;
+    padding-bottom: 4px;
+    padding-left: 0;
+    font-size: 32px;
+    line-height: 32px
+}
+
+.user .info .profile.fold .meta {
+    display: none
+}
+
+.user .info .profile.fold .meta:first-child,
+.user .info .profile.fold .meta:nth-child(2) {
+    display: block
+}
+
+.user .info .profile .fold-button {
+    margin-top: 8px;
+    margin-left: -16px
+}
+
+.user .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 16px 57px
+}
+
+.user .actions .edit,
+.user .actions .mc-follow {
+    margin-right: 58px
+}
+
+.user .actions .edit i {
+    font-size: 21px
+}
+
+.user .actions .follow {
+    display: flex;
+    flex: 1;
+    align-items: center
+}
+
+.user .actions .divider {
+    width: 1px;
+    height: 16px;
+    margin: 0 8px;
+    background-color: rgba(0, 0, 0, .12)
+}
+
+.mdui-theme-layout-dark .user .actions .divider {
+    background-color: hsla(0, 0%, 100%, .12)
+}
+
+@media (max-width:599px) {
+    .user,
+    .user .cover {
+        border-radius: 0
+    }
+    .user .info {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 16px 16px
+    }
+    .user .info .avatar-box {
+        width: 106px;
+        min-width: 106px;
+        height: 106px;
+        margin-top: -53px
+    }
+    .user .info .profile {
+        width: 100%;
+        padding-left: 0
+    }
+    .user .info .profile.fold {
+        width: auto
+    }
+    .user .info .profile .username {
+        padding-top: 10px;
+        font-size: 24px;
+        text-align: center
+    }
+    .user .actions {
+        position: relative;
+        margin-top: 54px;
+        padding: 0 16px 16px
+    }
+    .user .actions .edit,
+    .user .actions .mc-follow {
+        margin-right: 0
+    }
+    .user .actions .follow {
+        position: absolute;
+        top: -54px;
+        right: 16px;
+        left: 16px;
+        border-top: 1px solid rgba(0, 0, 0, .06);
+        border-bottom: 1px solid rgba(0, 0, 0, .06)
+    }
+    .mdui-theme-layout-dark .user .actions .follow {
+        border-color: hsla(0, 0%, 100%, .06)
+    }
+    .user .actions .followees,
+    .user .actions .followers {
+        width: 50%;
+        border-radius: 0
+    }
+    .user .actions .divider {
+        margin: 0
+    }
+}
+
+.mc-account {
+    max-width: 448px;
+    overflow-y: auto
+}
+
+.mc-account .arrow_back,
+.mc-account .close {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    display: block;
+    color: #fff
+}
+
+.mc-account .avatar {
+    position: absolute;
+    top: 40px;
+    left: 36px;
+    display: block;
+    color: hsla(0, 0%, 100%, .56);
+    font-size: 76px
+}
+
+.mc-account .mdui-dialog-title {
+    margin-bottom: 24px;
+    padding: 146px 40px 28px;
+    color: #fff
+}
+
+.mdui-theme-layout-dark .mc-account .mdui-dialog-title {
+    background-color: #303030
+}
+
+.mc-account form {
+    padding: 0 40px 62px
+}
+
+.mc-account .more-option {
+    margin-left: -16px
+}
+
+.mc-account .captcha-field {
+    margin-right: 116px;
+    overflow: visible
+}
+
+.mc-account .captcha-image {
+    position: absolute;
+    right: -116px;
+    bottom: 29px;
+    cursor: pointer
+}
+
+.mc-account .send-email-field {
+    margin-right: 116px;
+    overflow: visible
+}
+
+.mc-account .send-email {
+    position: absolute;
+    right: -116px;
+    bottom: 29px
+}
+
+.mc-account .actions {
+    margin-top: 24px
+}
+
+.mc-account .action-btn {
+    float: right
+}
+
+.mdui-theme-layout-dark .mc-account .action-btn {
+    background-color: #525252!important
+}
+
+@media (max-width:599px) {
+    .mc-account {
+        position: fixed!important;
+        top: 0!important;
+        right: 0!important;
+        bottom: 0!important;
+        left: 0!important;
+        width: 100%!important;
+        max-width: none!important;
+        height: 100%!important;
+        max-height: none!important;
+        margin: 0!important;
+        border-radius: 0!important
+    }
+    .mc-account .back,
+    .mc-account .close {
+        top: 10px;
+        left: 8px
+    }
+    .mc-account .avatar {
+        display: none
+    }
+    .mc-account .mdui-dialog-title {
+        padding: 10px 16px 10px 52px;
+        line-height: 36px
+    }
+    .mc-account form {
+        padding: 0 24px 24px
+    }
+    .mc-account form .mdui-textfield {
+        padding-top: 4px
+    }
+    .mc-account .actions {
+        margin-top: 14px
+    }
+}
+
+.mc-login .mdui-dialog-title {
+    background-color: #3f51b5
+}
