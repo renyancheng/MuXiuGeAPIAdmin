@@ -15,7 +15,10 @@
 等等等...更多功能等你来探索！
 
 ## Demo 
-[api.mwind.top](https://api.mwind.top)
+[api.mwind.top](https://api.mwind.top/)
+
+## Docs
+[doc.muxiuge.cn](https://doc.muxiuge.cn/)
 
 ## 用到的技术
 + MDUI框架
