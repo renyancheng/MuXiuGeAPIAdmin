@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑接口 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+</head>
+
+<?php require "header.html";?>
+		
+			
+			<div class="mc-nav" id="back">
+				<buttton class="back mdui-btn mdui-color-theme mdui-ripple"><i class="mdui-icon mdui-icon-left material-icons">arrow_back</i> 返回</button>
+			</div>
+		
+			<div class="mdui-card mdui-p-x-2" id="edit_api">
+            	<div class="mdui-textfield">
+					<label class="mdui-textfield-label">接口名称</label>
+					<input class="mdui-textfield-input" type="text" name="name" v-model="info.name" required/>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">接口英文名</label>
+					<input class="mdui-textfield-input" type="text" name="enname" v-model="info.enname" required/>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">接口简介</label>
+					<textarea class="mdui-textfield-input" rows="5" type="text" name="desc" maxlength="100" v-model="info.desc" required></textarea>
+				</div>
+				<div class="mdui-row">
+					<div class="mdui-col-xs-8">
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">接口地址</label>
+							<input class="mdui-textfield-input"  v-model="websetting.url+'API/'" type="text" disabled/>
+						</div>
+					</div>
+					<div class="mdui-col-xs-4">
+						<div class="mdui-textfield">
+							<input class="mdui-textfield-input mdui-m-t-2" type="text" name="url" v-model="info.url" required/>
+						</div>
+					</div>
+				</div>
+				<div class="mdui-row">
+					<div class="mdui-col-xs-8">
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">接口示例地址</label>
+							<input class="mdui-textfield-input" v-model="websetting.url+'API/'" type="text" disabled/>
+						</div>
+					</div>
+					<div class="mdui-col-xs-4">
+						<div class="mdui-textfield">
+							<input class="mdui-textfield-input mdui-m-t-2" type="text" name="example_url" v-model="info.example_url" required/>
+						</div>
+					</div>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">返回格式</label>
+					<input class="mdui-textfield-input" type="text" name="format" v-model="info.format" required/>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">请求方式</label>
+					<input class="mdui-textfield-input" type="text" name="method" v-model="info.method" required/>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">请求参数</label>
+					<textarea class="mdui-textfield-input" rows="5" name="request_parameter" type="text" v-model="info.request_parameter" required></textarea>
+					<div class="mdui-textfield-helper">[名称--类型--必填--备注]</div>
+					
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">返回参数</label>
+					<textarea class="mdui-textfield-input" rows="5" name="return_parameter" type="text" v-model="info.return_parameter" required></textarea>
+					<div class="mdui-textfield-helper">[名称--类型--说明]</div>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">状态码</label>
+					<textarea class="mdui-textfield-input" rows="5" name="error_code" type="text" v-model="info.error_code" required></textarea>
+					<div class="mdui-textfield-helper">[状态码--状态信息]</div>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">PHP示例代码</label>
+					<textarea class="mdui-textfield-input" rows="8" name="PHP_example" type="text" v-model="info.PHP_example" required></textarea>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">返回示例</label>
+					<textarea class="mdui-textfield-input" rows="3" type="text" name="return" v-model="info.return" required></textarea>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">接口状态</label>
+					<select class="mdui-select" v-model="info.status" style="width:100%;">
+  						<option value="1">正常</option>
+  						<option value="0">维护</option>
+					</select>
+				</div>
+            	<button class="mdui-fab mdui-fab-fixed mdui-color-theme-accent mdui-ripple" @click="update"><i class="mdui-icon material-icons">check</i></button>
+			</div>
+        
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script>
+let edit_api = new Vue({
+	el: '#edit_api',
+	data: {
+		info: [],
+		websetting: []
+	},
+	methods: {
+		update: function(){
+			var id = getRequestParam('id');
+			fetch('./Data/post.php',{
+				method:'POST',
+				headers: {
+       		 		'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body:'type=edit_api&id='+id+'&name='+encodeURIComponent(this.info.name)+'&enname='+encodeURIComponent(this.info.enname)+'&desc='+encodeURIComponent(this.info.desc)+'&url='+encodeURIComponent(this.info.url)+'&example_url='+encodeURIComponent(this.info.example_url)+'&format='+encodeURIComponent(this.info.format)+'&method='+encodeURIComponent(this.info.method)+'&request_parameter='+encodeURIComponent(this.info.request_parameter)+'&return_parameter='+encodeURIComponent(this.info.return_parameter)+'&error_code='+encodeURIComponent(this.info.error_code)+'&PHP_example='+encodeURIComponent(this.info.PHP_example)+'&return='+encodeURIComponent(this.info.return)+'&status='+encodeURIComponent(this.info.status)
+			})
+				.then(response => response.json())
+				.then(json => {
+					mdui.snackbar(json.msg)
+				})
+				.catch(function(error){
+					mdui.snackbar(error.message)
+				})
+		}
+	},
+	created (){
+		var id = getRequestParam('id');
+		fetch('./Data/api.php?type=getOneApi&id='+id)
+			.then(response => response.json())
+			.then(json => {
+				this.info = json.data;
+				/* 请求参数 */
+				var request_parameter = json.data.request_parameter;
+				request_parameter = JSON.parse(request_parameter).data;
+				var request_parameter_new = '';
+				$.each(request_parameter, function(key, value){
+					request_parameter_new += '['+value.name+'--'+value.type+'--'+value.required+'--'+value.info+']';
+				});
+				this.info.request_parameter = request_parameter_new;
+				/* 返回参数 */
+				var return_parameter = json.data.return_parameter;
+				return_parameter = JSON.parse(return_parameter).data;
+				var return_parameter_new = '';
+				$.each(return_parameter, function(key, value){
+					return_parameter_new += '['+value.name+'--'+value.type+'--'+value.msg+']';
+				});
+				this.info.return_parameter = return_parameter_new;
+				/* 返回状态码 */
+				var error_code = json.data.error_code;
+				error_code = JSON.parse(error_code).data;
+				var error_code_new = '';
+				$.each(error_code, function(key, value){
+					error_code_new += '['+value.code+'--'+value.msg+']';
+				});
+				this.info.error_code = error_code_new;
+			});
+		fetch('./Data/api.php?type=getWebSetting')
+			.then(response => response.json())
+			.then(json => {
+				this.websetting = json.data;
+			});
+	}
+});
+</script>
+</body>
+</html>

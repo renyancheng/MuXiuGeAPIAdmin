@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>跳转中……</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <style>
+    	*{
+			margin: 0px;
+			parding: 0px;
+    	}
+    	html, body{
+    		min-height: 100vh;
+    	}
+    	body{
+    		display: flex;
+    		justify-content: center;
+    		align-items: center;
+    	}
+    </style>
+</head>
+<body class="mdui-theme-accent-blue">
+    <div class="mdui-container-fluid">
+    		<div class="mdui-spinner" style="width:60px;height:60px;"></div>
+    </div>
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/index.js"></script>
+<script>
+var url = getRequestParam('url');
+if(!url){
+	mdui.alert('跳转发送错误！');
+	setTimeout(function(){
+		window.history.back(-1);
+	},2000)
+}else{
+	mdui.snackbar('将在<font color="red">1秒</font>后跳转请稍等');
+	setTimeout(function(){
+		window.location.href = url;
+	},1000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>网站配置 -
+        <?php echo $config['title'];?>
+    </title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/mdclub.css" />
+</head>
+<?php require "header.html";?>
+
+<div class="mdui-tab mdui-shadow-1" mdui-tab>
+    <a href="#websetting" class="mdui-ripple">网站信息</a>
+    <a href="#smtp_config" class="mdui-ripple">邮件配置</a>
+</div>
+
+<!-- 网站信息部分 -->
+<div id="websetting" class="mdui-p-a-2">
+    <div class="mdui-card mdui-card-shadow option mdui-p-x-2">
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站标题</label>
+            <input class="mdui-textfield-input" type="text" name="title" v-model="setting.title" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站副标题</label>
+            <input class="mdui-textfield-input" type="text" name="subtitle" v-model="setting.subtitle" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站简介</label>
+            <textarea class="mdui-textfield-input" rows="5" type="text" name="description" maxlength="100" v-model="setting.description" required></textarea>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站关键词</label>
+            <input class="mdui-textfield-input" type="text" name="keywords" v-model="setting.keywords" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站头像</label>
+            <input class="mdui-textfield-input" type="text" name="favicon" v-model="setting.favicon" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站地址</label>
+            <input class="mdui-textfield-input" type="text" name="url" v-model="setting.url" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站备案信息</label>
+            <textarea class="mdui-textfield-input" type="text" name="icp" rows="3" v-model="setting.icp" required/></textarea>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">自定义脚本（有bug暂时无法使用）</label>
+            <textarea class="mdui-textfield-input" type="text" name="end_script" rows="1" v-model="setting.end_script" disabled/></textarea>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站版权信息</label>
+            <textarea class="mdui-textfield-input" rows="5" type="text" name="copyright" v-model="setting.copyright" required></textarea>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">网站强调色</label>
+            <input class="mdui-textfield-input" type="text" name="accent" value="blue" disabled />
+            <div class="mdui-textfield-helper">为保证某些位置颜色不乱套，现在只支持蓝色，如果你还是想换颜色，请到数据库修改:（</div>
+        </div>
+        <ul class="mdui-list mdui-m-b-2">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">build</i>
+                <div class="mdui-list-item-content">维护模式</div>
+                <label class="mdui-switch">
+							<input type="checkbox" v-model="setting.close_site" @click="toggle_close_site"/>
+							<i class="mdui-switch-icon"></i>
+					  	</label>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">closed_caption</i>
+                <div class="mdui-list-item-content">防CC攻击</div>
+                <label class="mdui-switch">
+						  	<input type="checkbox" v-model="setting.cc_protect" @click="toggle_cc_protect">
+						  	<i class="mdui-switch-icon"></i>
+						</label>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">warning</i>
+                <div class="mdui-list-item-content">防SQL注入</div>
+                <label class="mdui-switch">
+							<input type="checkbox" v-model="setting.fire_wall" @click="toggle_fire_wall"/>
+						<i class="mdui-switch-icon"></i>
+						</label>
+            </li>
+        </ul>
+        <button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-m-b-2" @click="update">保存</button>
+    </div>
+</div>
+
+<!-- 邮件配置部分 -->
+<div id="smtp_config" class="mdui-p-a-2">
+    <div class="mdui-card mdui-card-shadow option mdui-p-x-2">
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">SMTP 服务器</label>
+            <input class="mdui-textfield-input" type="text" v-model="smtp_config.smtp_host" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">SMTP 用户名</label>
+            <input class="mdui-textfield-input" type="text" v-model="smtp_config.smtp_username" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">SMTP 密码</label>
+            <input class="mdui-textfield-input" type="text" v-model="smtp_config.smtp_password" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">SMTP 端口</label>
+            <input class="mdui-textfield-input" type="number" v-model="smtp_config.smtp_port" required/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">加密连接类型</label>
+            <select class="mdui-select" v-model="smtp_config.smtp_secure" style="width:100%;">
+						<option value>无</option>
+ 						<option value="ssl">SSL</option>
+ 						<option value="tls">TLS</option>
+					</select>
+        </div>
+        <button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-m-b-2" @click="update">保存</button>
+        <button class="mdui-btn mdui-color-theme mdui-btn-outlined mdui-m-b-2" @click="sendTestEmail">发送测试邮件</button>
+    </div>
+</div>
+
+
+
+<?php require "footer.html";?>
+<script src="./assets/js/vue.js"></script>
+<script>
+    let websetting = new Vue({
+        el: '#websetting',
+        data: {
+            setting: [],
+        },
+        methods: {
+            update: function() {
+                fetch('./Data/post.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: 'type=websetting&title=' + encodeURIComponent(this.setting.title) + '&subtitle=' + encodeURIComponent(this.setting.subtitle) + '&description=' + encodeURIComponent(this.setting.description) + '&keywords=' + encodeURIComponent(this.setting.keywords) + '&favicon=' + encodeURIComponent(this.setting.favicon) + '&url=' + encodeURIComponent(this.setting.url) + '&icp=' + encodeURIComponent(this.setting.icp) + '&copyright=' + encodeURIComponent(this.setting.copyright) + '&access=blue&end_script=' + encodeURIComponent(this.setting.end_script)
+                    })
+                    .then(response => response.json())
+                    .then(json => {
+                        mdui.snackbar(json.msg);
+                    });
+            },
+            toggle_close_site: function() {
+                if (this.setting.close_site) {
+                    this.setting.close_site = false;
+                } else {
+                    this.setting.close_site = true;
+                }
+                fetch('./Data/post.php?type=close_site&close_site=' + Number(this.setting.close_site))
+                    .then(response => response.json())
+                    .then(json => {
+                        mdui.snackbar(json.msg)
+                    })
+            },
+            toggle_cc_protect: function() {
+                if (this.setting.cc_protect) {
+                    this.setting.cc_protect = false;
+                } else {
+                    this.setting.cc_protect = true;
+                }
+                fetch('./Data/post.php?type=cc_protect&cc_protect=' + Number(this.setting.cc_protect))
+                    .then(response => response.json())
+                    .then(json => {
+                        mdui.snackbar(json.msg)
+                    })
+            },
+            toggle_fire_wall: function() {
+                if (this.setting.fire_wall) {
+                    this.setting.fire_wall = false;
+                } else {
+                    this.setting.fire_wall = true;
+                }
+                fetch('./Data/post.php?type=fire_wall&fire_wall=' + Number(this.setting.fire_wall))
+                    .then(response => response.json())
+                    .then(json => {
+                        mdui.snackbar(json.msg)
+                    })
+            },
+        },
+        created() {
+            fetch('./Data/api.php?type=getWebSetting')
+                .then(response => response.json())
+                .then(json => {
+                    this.setting = json.data;
+                    this.setting.close_site = Boolean(parseInt(this.setting.close_site));
+                    this.setting.cc_protect = Boolean(parseInt(this.setting.cc_protect));
+                    this.setting.fire_wall = Boolean(parseInt(this.setting.fire_wall));
+                });
+        }
+    });
+
+    let smtp_config = new Vue({
+        el: '#smtp_config',
+        data: {
+            smtp_config: []
+        },
+        methods: {
+            update: function() {
+                fetch('./Data/post.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: 'type=smtp_config&smtp_host=' + encodeURIComponent(this.smtp_config.smtp_host) + '&smtp_username=' + encodeURIComponent(this.smtp_config.smtp_username) + '&smtp_password=' + encodeURIComponent(this.smtp_config.smtp_password) + '&smtp_port=' + encodeURIComponent(this.smtp_config.smtp_port) + '&smtp_secure=' + encodeURIComponent(this.smtp_config.smtp_secure)
+                    })
+                    .then(response => response.json())
+                    .then(json => {
+                        mdui.snackbar(json.msg);
+                    });
+            },
+            sendTestEmail: function() {
+                mdui.prompt('请输入收信邮箱',
+                    function(value) {
+                        if (checkMailAddress(value)) {
+                            fetch('./Data/api.php?type=sendTestEmail&to=' + encodeURIComponent(value))
+                                .then(response => response.json())
+                                .then(json => {
+                                    mdui.alert(json.msg, '提示');
+                                })
+                        } else {
+                            mdui.snackbar('请填写正确的邮箱地址！');
+                        }
+                    },
+                    function() {}, {
+                        confirmText: '发送',
+                        cancelText: '取消'
+                    }
+                );
+            }
+        },
+        created() {
+            fetch('./Data/api.php?type=getSmtpConfig')
+                .then(response => response.json())
+                .then(json => {
+                    this.smtp_config = json.data;
+                })
+        }
+    });
+</script>
+</body>
+
+</html>

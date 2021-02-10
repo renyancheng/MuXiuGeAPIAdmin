@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <?php echo $config['title'];?>
+    </title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css" />
+    <link rel="stylesheet" href="./assets/css/mdclub.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<?php require "header.html";?>
+
+<div class="mdui-container mdui-p-x-2" id="main">
+
+    <!-- 展示所有接口 -->
+    <div id="app">
+        <div class="mdui-row">
+            <div v-for="api in apis">
+                <div class="mdui-col-sm-6 mdui-col-md-4" v-if="api">
+                    <div class="mdui-card mdui-hoverable mdui-m-y-2">
+                        <div class="mdui-card-primary">
+                            <div class="mdui-card-primary-title">
+                                {{ api.name }}
+                                <div class="mdui-badge mdui-color-green-400 mdui-text-color-white"
+                                    v-if="api.status == 1">正常</div>
+                                <div class="mdui-badge mdui-color-red-700 mdui-text-color-white"
+                                    v-else-if="api.status == 0">维护</div>
+                                <div class="mdui-badge mdui-color-yellow-700 mdui-text-color-white" v-else>未知状态</div>
+                                <button class="mdui-btn mdui-btn-icon mdui-float-right"
+                                    mdui-dialog="{target:'.feedback_dialog'}" mdui-tooltip="{content: 'feedback'}"
+                                    @click="getApiInfo(api.id)"><i
+                                        class="mdui-icon mdui-text-color-theme-icon material-icons">feedback</i></button>
+                            </div>
+                            <div class="mdui-card-primary-subtitle" style="font-size:12px;"><i
+                                    class="mdui-icon material-icons" style="font-size:12px;">equalizer</i>累计调用：{{
+                                api.access }}次</div>
+                        </div>
+                        <div class="mdui-card-content">{{ api.desc }}</div>
+                        <div class="mdui-card-actions">
+                            <a class="mdui-btn mdui-ripple mdui-text-color-theme-accent mdui-float-right"
+                                target="_blank" :href="'?action=doc&id='+api.id" v-if="api.status == 1">More</a>
+                            <a class="mdui-btn mdui-ripple mdui-text-color-grey mdui-float-right"
+                                href="javascript:mdui.alert('该接口正在维护中，不妨先去看看其他的吧！','提示');" v-else>维护中</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mc-empty" v-if="!apis"
+                style="background-image: url('assets/css/994575169312f0027615406d265202f2.png');">
+                <div class="title">
+                    尚未任何接口
+                </div>
+                <div class="description">
+                    添加接口后，将显示在这里
+                </div>
+            </div>
+        </div>
+        <!-- 反馈Dialog -->
+        <div class="mc-user-edit mdui-dialog feedback_dialog">
+            <div class="mdui-dialog-title mdui-p-y-2">
+                <button class="mdui-btn mdui-btn-icon" mdui-dialog-close><i
+                        class="mdui-icon material-icons">close</i></button> 正在反馈
+            </div>
+            <div class="mdui-dialog-content mdui-p-x-3 mdui-p-b-2">
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">反馈标题</label>
+                    <input class="mdui-textfield-input" type="text" v-model="feedback.title" required />
+                    <div class="mdui-textfield-error">反馈标题不能为空</div>
+                </div>
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">反馈内容</label>
+                    <textarea class="mdui-textfield-input" rows="12" v-model="feedback.content"></textarea>
+                </div>
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">联系邮箱</label>
+                    <input class="mdui-textfield-input" type="email" v-model="feedback.email" required />
+                    <div class="mdui-textfield-error">联系邮箱格式不正确</div>
+                </div>
+                <br>
+                <button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-m-b-2" @click="feedbackSend"
+                    id="submitFeedback" mdui-dialog-close>反馈</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 搜索接口Dialog -->
+    <div id="search" class="mc-user-edit mdui-dialog" style="height: 400px;">
+        <div class="mdui-dialog-title mdui-p-y-2">
+            <div class="mdui-valign">
+                <button class="mdui-btn mdui-btn-icon" style="margin:9px 9px 0 -10px" mdui-dialog-close><i
+                        class="mdui-icon material-icons">close</i></button>
+                <div class="mdui-textfield mdui-textfield-floating-label mdui-float-left"
+                    style="padding-right:10px;width:100%">
+                    <input id="searchbox" class="mdui-textfield-input" type="text" v-model="searchContent"
+                        @focus="focus" placeholder="请输入要搜索的接口名称" required />
+                </div>
+            </div>
+
+        </div>
+        <div class="mdui-dialog-content mdui-p-x-2">
+            <div v-if="searchResult" style="min-height:200px;">
+                <ul class="mdui-list">
+                    <a class="mdui-list-item mdui-ripple" v-for="api in apis" target="_blank"
+                        :href="'?action=doc&id='+api.id">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title">ID:{{ api.id }} {{ api.name }}</div>
+                        </div>
+                        <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-theme-a200">equalizer</i>
+                        {{ api.access}}
+                    </a>
+                </ul>
+            </div>
+            <div class="mdui-text-center mdui-m-t-2" v-else>
+                没有搜到相关接口
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 浮动搜索按钮 -->
+    <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent" mdui-dialog="{target: '#search'}" onclick="focusInput()">
+        <i class="mdui-icon material-icons">search</i>
+    </button>
+    <!-- End 浮动搜索按钮 -->
+</div>
+
+<?php require "footer.html";?>
+
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/jquery.cookie.min.js"></script>
+<script src="./assets/js/sweetalert.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/index.js"></script>
+<script src="./assets/js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            apis: [],
+            feedback: [
+                'id',
+                'name',
+                'title',
+                'content',
+                'email'
+            ],
+        },
+        methods: {
+            feedbackSend: function () {
+                fetch('./Data/post.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'type=add_feedback&api_id=' + this.feedback.id + '&api_name=' + encodeURIComponent(this.feedback.name) + '&title=' + encodeURIComponent(this.feedback.title) + '&content=' + encodeURIComponent(this.feedback.content) + '&email=' + encodeURIComponent(this.feedback.email)
+                })
+                    .then(response => response.json())
+                    .then(json => {
+                        mdui.snackbar(json.msg);
+                    })
+            },
+            getApiInfo: function (id) {
+                $('#submitFeedback').attr('disabled', true);
+                fetch('./Data/api.php?type=getOneApi&id=' + id)
+                    .then(response => response.json())
+                    .then(json => {
+                        this.feedback.id = json.data.id;
+                        this.feedback.name = json.data.name;
+                        $('#submitFeedback').attr('disabled', false);
+                    })
+            },
+
+        },
+        created() {
+            fetch('./Data/api.php?type=getAllApi')
+                .then(response => response.json())
+                .then(json => {
+                    this.apis = json.data;
+                })
+            fetch('./Data/api.php?type=getWebSetting')
+                .then(response => response.json())
+                .then(json => {
+                    if (json.data.post && json.data.post_id != -1 && !$.cookie('post')) {
+                        $.cookie('post', true, {
+                            expires: 1
+                        });
+                        swal(json.data.post.title, json.data.post.content, {
+                            icon: json.data.post.icon,
+                            buttons: false
+                        });
+                    }
+                })
+        }
+    });
+
+    let search = new Vue({
+        el: '#search',
+        data: {
+            apis: [],
+            recommonds: [],
+            searchContent: '',
+            searchResult: true,
+            msg: false
+        },
+        methods: {
+        },
+        watch: {
+            searchContent: function (val) {
+                if (val) {
+                    fetch('./Data/api.php?type=searchApi&s=' + val)
+                        .then(response => response.json())
+                        .then(json => {
+                            if (json.code == 0) {
+                                this.searchResult = true;
+                                this.apis = json.data;
+                            } else {
+                                this.searchResult = false;
+                                this.msg = json.msg;
+                            }
+                        });
+                } else {
+                    this.searchResult = true;
+                    this.apis = [];
+                }
+            }
+        }
+    });
+    function focusInput() {
+        setTimeout(function () {
+            document.getElementById('searchbox').focus();
+        }, 100);
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>站点维护中 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <style>
+    	*{
+    		margin: 0;
+    		parding: 0;
+    	}
+    	html, body{
+    		min-height: 100vh;
+    	}
+    	body{
+    		display: flex;
+    		justify-content: center;
+    		align-items: center;
+    	}
+    	.mdui-card{
+    		width: 300px;
+    		border-radius: 10px;
+    	}
+    	.mdui-btn{
+    		border-radius: 5px;
+    	}
+    	</style>
+</head>
+<body class="mdui-theme-accent-blue mdui-text-color-theme-text">
+    <div class="mdui-container-fluid">
+    		<!--<div id="loading"></div>-->
+    		<img class="mdui-center" src="./assets/images/fix.png" style="width:300px;height:auto;" />
+ 			<div class="mdui-text-center mdui-typo">
+				<h1>站点正在维护</h1>
+				<p>很抱歉，站点正在维护中，请稍后访问</p>
+			</div>
+
+    </div>
+
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/index.js"></script>
+</body>
+</html>

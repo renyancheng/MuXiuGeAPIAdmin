@@ -1,0 +1,131 @@
+<html>
+
+<head>
+    <title>管理友链 -
+        <?php echo $config['title'];?>
+    </title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/mdclub.css" />
+</head>
+
+<?php require "header.html";?>
+
+<div class="mdui-container mdui-p-x-2" id="control_link">
+    <div class="mdui-table-fluid" v-if="links">
+        <table class="mdui-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>名称</th>
+                    <th>地址</th>
+                    <th>图片地址</th>
+                    <th>添加时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="mdui-table-row" v-for="link in links">
+                    <td>{{ link.id }}</td>
+                    <td style="width:120px;">{{ link.name }}</td>
+                    <td>{{ link.url }}</td>
+                    <td>{{ link.picurl }}
+                        <td>{{ getLocalTime(link.time) }}</td>
+                        <td style="width:120px;">
+                            <a class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '修改'}" :href="'?action=admin&page=edit_link&id='+link.id"><i class="mdui-icon material-icons mdui-text-color-theme-icon">edit</i></a>
+                            <button class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '删除'}" @click="deleteLink(link.id)"><i class="mdui-icon material-icons mdui-text-color-theme-icon">delete</i></button>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mc-empty" v-else style="background-image: url('assets/css/994575169312f0027615406d265202f2.png');">
+        <div class="title">
+            尚未任何友情链接
+        </div>
+        <div class="description">
+            快去添加一个吧
+        </div>
+    </div>
+</div>
+
+
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script src="./assets/js/sweetalert.min.js"></script>
+<script>
+    let control_link = new Vue({
+        el: '#control_link',
+        data: {
+            links: [],
+        },
+        methods: {
+            deleteLink: function(id) {
+                swal({
+                        title: "确定删除该链接?",
+                        text: "请注意数据删除后将不可恢复！",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                method: 'POST',
+                                url: './Data/post.php',
+                                data: {
+                                    type: 'del_link',
+                                    id: id
+                                },
+                                beforeSend: function() {
+                                    swal("删除中......", " ", {
+                                        icon: "info",
+                                        buttons: false
+                                    });
+                                },
+                                success: function(data) {
+                                    var code = JSON.parse(data).code;
+                                    var msg = JSON.parse(data).msg;
+                                    if (code == 0) {
+                                        swal(msg, "2秒后自动刷新页面......", {
+                                            icon: "success",
+                                            buttons: false
+                                        });
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 2000);
+                                    } else {
+                                        swal(msg, " ", {
+                                            icon: "error",
+                                            buttons: false
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
+
+                        }
+                    });
+            },
+            getLocalTime: function(nS) {
+                return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+            }
+        },
+        created() {
+            fetch('./Data/api.php?type=getAllLink')
+                .then(response => response.json())
+                .then(json => {
+                    this.links = json.data;
+                })
+        }
+    });
+</script>
+</body>
+
+</html>

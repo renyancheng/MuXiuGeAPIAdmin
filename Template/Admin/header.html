@@ -1,0 +1,88 @@
+<body class="mdui-appbar-with-toolbar mdui-theme-primary-<?php echo $config['theme'];?> mdui-theme-accent-<?php echo $config['accent'];?>" id="top">
+    <header class="mdui-appbar-fixed mdui-appbar">
+        <div class="mdui-toolbar mdui-color-white">
+            <span class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: '#main-drawer', swipe: true}"><i class="mdui-icon material-icons">menu</i></span>
+            <span class="mdui-typo-headline mdui-hidden-xs"><?php echo $config['title'];?></span>
+            <span class="mdui-typo-title">后台管理</span>
+            <div class="mdui-toolbar-spacer"></div>
+            <button id="change_style" mdui-tooltip="{content: '夜间模式', position: 'bottom'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe3a9;</i></button>
+            <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#menu'}"><i class="mdui-icon material-icons">more_vert</i></button>
+            <ul class="mdui-menu" id="menu">
+            	<li class="mdui-menu-item">
+    				<a href="?action=admin&page=login_log" class="mdui-ripple"><svg class="mdui-icon mdui-m-r-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"><path d="M16,14H17.5V16.82L19.94,18.23L19.19,19.53L16,17.69V14M17,12A5,5 0 0,0 12,17A5,5 0 0,0 17,22A5,5 0 0,0 22,17A5,5 0 0,0 17,12M17,10A7,7 0 0,1 24,17A7,7 0 0,1 17,24C14.21,24 11.8,22.36 10.67,20H1V17C1,14.34 6.33,13 9,13C9.6,13 10.34,13.07 11.12,13.2C12.36,11.28 14.53,10 17,10M10,17C10,16.3 10.1,15.62 10.29,15C9.87,14.93 9.43,14.9 9,14.9C6.03,14.9 2.9,16.36 2.9,17V18.1H10.09C10.03,17.74 10,17.37 10,17M9,4A4,4 0 0,1 13,8A4,4 0 0,1 9,12A4,4 0 0,1 5,8A4,4 0 0,1 9,4M9,5.9A2.1,2.1 0 0,0 6.9,8A2.1,2.1 0 0,0 9,10.1A2.1,2.1 0 0,0 11.1,8A2.1,2.1 0 0,0 9,5.9Z" /></svg>登录日志</a>
+  				</li>
+  				<li class="mdui-menu-item">
+    				<a href="?action=admin&page=edit_pwd" class="mdui-ripple"><i class="mdui-menu-item-icon mdui-icon material-icons">https</i>修改密码</a>
+  				</li>
+  				<li class="mdui-menu-item">
+    				<a class="mdui-ripple" id="exit_login"><i class="mdui-menu-item-icon mdui-icon material-icons">exit_to_app</i>退出登录</a>
+  				</li>
+  			</ul>
+        </div>
+    </header>
+
+   <div class="mc-drawer mdui-drawer mdui-drawer-close" id="main-drawer">
+  		<ul class="mdui-list mdui-p-b-5">
+			<li class="mdui-list-item mdui-ripple index" onclick="location='?action=admin'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">dashboard</i>
+				<div class="mdui-list-item-content">仪表盘</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple" onclick="location='?'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">flag</i>
+				<div class="mdui-list-item-content">访问前台</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple websetting" onclick="location='?action=admin&page=websetting'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
+				<div class="mdui-list-item-content">网站配置</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple edit_user" onclick="location='?action=admin&page=edit_user'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">person</i>
+				<div class="mdui-list-item-content">用户信息</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple access_log" onclick="location='?action=admin&page=access_log'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">insert_drive_file</i>
+				<div class="mdui-list-item-content">访问日志</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple add" onclick="location='?action=admin&page=add'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">add</i>
+				<div class="mdui-list-item-content">添加接口</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple control" onclick="location='?action=admin&page=control'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">apps</i>
+				<div class="mdui-list-item-content">管理接口</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple add_link" onclick="location='?action=admin&page=add_link'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">add</i>
+				<div class="mdui-list-item-content">添加友链</div>
+			</li>
+			
+			<li class="mdui-list-item mdui-ripple control_link" onclick="location='?action=admin&page=control_link'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">link</i>
+				<div class="mdui-list-item-content">管理友链</div>
+			</li>
+			<li class="mdui-list-item mdui-ripple control_post" onclick="location='?action=admin&page=control_post'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">library_books</i>
+				<div class="mdui-list-item-content">管理公告</div>
+			</li>
+			<li class="mdui-list-item mdui-ripple control_feedback" onclick="location='?action=admin&page=control_feedback'">
+				<i class="mdui-list-item-icon mdui-icon material-icons">feedback</i>
+				<div class="mdui-list-item-content">管理反馈</div>
+			</li>
+		</ul>
+		<div class="copyright mdui-color-white mdui-p-x-2 mdui-p-y-1" style="position:absolute;bottom:0px;width:100%;font-size:13px;">
+			<p>
+				<?php if($config['copyright']){ echo $config['copyright'].'<br>';}?>
+				<?php if($config['icp']){ echo $config['icp'].'<br>';}?>
+				Powered by <a href="https://mdui.org" target="_blank">MDUI</a> &amp; <a href="https://mdclub.org" target="_blank">MDClub</a><br>
+				由Mufeng设计与编码❤️
+				<!-- 留个版权谢谢🙏 -->
+			</p>
+		</div>
+	</div>

@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>第一步 - 安装数据库</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="install,安装,API管理系统" />
+    <meta name="description" content="API管理系统安装页面" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/mdclub.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+</head>
+<body class="mdui-theme-primary-blue mdui-theme-accent-blue mdui-appbar-with-toolbar">
+
+	<div class="mdui-appbar mdui-appbar-fixed">
+  		<div class="mdui-toolbar mdui-color-white">
+    		<a href="javascript:;" class="mdui-typo-headline">第一步 - 安装数据库</a>
+    		<div class="mdui-toolbar-spacer"></div>
+  		</div>
+  		<div class="mdui-progress">
+			<div class="mdui-progress-determinate" style="width: 30%;"></div>
+		</div>
+	</div>
+	
+    <div class="mdui-container mdui-p-x-2">
+    	<p>请在下方填写你的数据库连接信息，如果你不确定，请联系你的服务器商。</p>
+		<form action="./Core/install.php" method="post">
+			<div class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">数据库地址</label>
+				<input class="mdui-textfield-input" type="text" name="host" value="localhost" required/>
+			</div>
+			
+			<div class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">数据库端口</label>
+				<input class="mdui-textfield-input" type="text" name="port" value="3306" required/>
+			</div>
+			
+			<div class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">数据库名</label>
+				<input class="mdui-textfield-input" type="text" name="dbname" required/>
+			</div>
+	
+ 			<div class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">数据库用户名</label>
+				<input class="mdui-textfield-input" type="text" name="username" required/>
+			</div>
+			
+			<div class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">数据库密码</label>
+				<input class="mdui-textfield-input" type="password" name="password" />
+			</div>
+			
+			<input class="mdui-hidden" name="step" value="1" />
+			<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mdui-m-t-2" type="submit">下一步</button>
+    	</form>
+	</div>
+
+
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/vue.js"></script>
+</body>
+</html>

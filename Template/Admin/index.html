@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>仪表盘 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+</head>
+
+<?php require "header.html";?>
+
+<div class="mdui-container mdui-p-x-2" id="admin">
+	<div class="mdui-card mdui-m-b-2">
+		<div class="mdui-card-primary">
+			<div class="mdui-card-primary-title">数据总量</div>
+		</div>
+		<div class="mdui-card-content">
+			<div class="mdui-row">
+				<div class="mdui-col-sm-2 mdui-col-xs-4">
+					<div class="mdui-card-primary-subtitle">调用量</div>
+					<div class="mdui-card-primary-title">{{ num.access }}</div>
+				</div>
+				<div class="mdui-col-sm-2 mdui-col-xs-4">
+					<div class="mdui-card-primary-subtitle">接口量</div>
+					<div class="mdui-card-primary-title">{{ num.api }}</div>
+				</div>
+				<div class="mdui-col-sm-2 mdui-col-xs-4">
+					<div class="mdui-card-primary-subtitle">友链量</div>
+					<div class="mdui-card-primary-title">{{ num.link }}</div>
+				</div>
+				<div class="mdui-col-sm-2 mdui-col-xs-4">
+					<div class="mdui-card-primary-subtitle">蜘蛛量</div>
+					<div class="mdui-card-primary-title">{{ num.spider }}</div>
+				</div>
+				<div class="mdui-col-sm-2 mdui-col-xs-4">
+					<div class="mdui-card-primary-subtitle">公告量</div>
+					<div class="mdui-card-primary-title">{{ num.post }}</div>
+				</div>
+				<div class="mdui-col-sm-2 mdui-col-xs-4">
+					<div class="mdui-card-primary-subtitle">待处理反馈</div>
+					<div class="mdui-card-primary-title">{{ num.feedback }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <div class="mdui-row">
+  		<div class="mdui-col-sm-6">
+  			<div class="mdui-card mdui-m-b-2 mdui-p-x-2">
+				<div class="mdui-card-primary">
+					<div class="mdui-card-primary-title">服务器信息</div>
+				</div>
+      			<ul class="mdui-list">
+      				<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">PHP版本</div><?=$config['php_version']?></li>
+      				<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">服务器系统</div><?=$config['php_uname']?></li>
+      				<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">PHP运行方式</div><?=$config['server_software']?></li>
+      				<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">文件上传限制</div><?=$config['upload_max_filesize']?></li>
+      				<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">脚本执行最长时间</div><?=$config['max_execution_time']?></li>
+    			</ul>
+			</div>
+  		</div>
+  		<div class="mdui-col-sm-6">
+  			<div class="mdui-card mdui-m-b-2 mdui-p-x-2">
+				<div class="mdui-card-primary">
+					<div class="mdui-card-primary-title">接口调用排行</div>
+				</div>
+      			<ul class="mdui-list">
+      				<li class="mdui-list-item mdui-ripple" v-for="(api,index) in apis">
+      					<i class="mdui-list-item-avatar mdui-icon material-icons mdui-color-theme-accent">filter_{{index+1}}</i>
+      					<div class="mdui-list-item-content">{{api.name}}</div>
+      					调用：{{api.access}}
+      				</li>
+    			</ul>
+			</div>
+  		</div>
+	</div>
+    <div class="mdui-row">
+  		<div class="mdui-col-sm-6">
+  			<div class="mdui-card mdui-m-b-2 mdui-p-a-2">
+    			<div class="mdui-card-primary-title">访问数据</div>
+    			<div class="mdui-card-content">
+					<canvas id="access"></canvas>
+				</div>
+    		</div>
+  		</div>
+  		<div class="mdui-col-sm-6">
+  			<div class="mdui-card mdui-p-a-2">
+    			<div class="mdui-card-primary-title">蜘蛛数量</div>
+    			<div class="mdui-card-content">
+					<canvas id="spider"></canvas>
+				</div>
+    		</div>	
+  		</div>
+	</div>
+                      			
+</div>
+
+<?php require "footer.html";?>
+
+<script src="./assets/js/chart.min.js"></script>
+<script src="./assets/js/vue.js"></script>
+<script>
+let admin = new Vue({
+	el: '#admin',
+	data: {
+		num: [],
+		apis: [],
+		accessChartNum: [],
+		accessChartDay: [],
+		spiderChartNum: [],
+		spiderChartDay: [],
+	},
+	created (){
+		fetch('./Data/api.php?type=getAdminInfo')
+			.then(response => response.json())
+			.then(json => {
+				this.num = json.data;
+				this.accessChartDay = json.data.access_time.map(Number);
+				this.accessChartNum = json.data.access_data.map(Number);
+				this.spiderChartDay = json.data.spider_time.map(Number);
+				this.spiderChartNum = json.data.spider_data.map(Number);
+			});	
+		fetch('./Data/api.php?type=getApiAccessList')
+			.then(response => response.json())
+			.then(json => {
+				this.apis = json.data;
+			});
+	}
+	
+});
+setTimeout(function(){
+	new Chart($("#access"), {
+		type: 'line',
+		data: {
+			labels: admin.accessChartDay,
+			datasets: [{
+				label: "调用量",
+				fill: false,
+				borderWidth: 2,
+				pointRadius: 3,
+				borderColor: "#448AFF",
+				pointBackgroundColor: "#2196F3",
+				pointBorderColor: "#448AFF",
+				pointHoverBackgroundColor: "#fff",
+				pointHoverBorderColor: "#448AFF",
+				data: admin.accessChartNum
+			}]
+		},
+		options: {
+			legend: {
+				display: false
+			},
+		}
+	});
+
+	new Chart($("#spider"), {
+		type: 'line',
+		data: {
+			labels: admin.spiderChartDay,
+			datasets: [{
+				label: "蜘蛛量",
+				fill: false,
+				borderWidth: 2,
+				pointRadius: 3,
+				borderColor: "#448AFF",
+				pointBackgroundColor: "#2196F3",
+				pointBorderColor: "#448AFF",
+				pointHoverBackgroundColor: "#fff",
+				pointHoverBorderColor: "#448AFF",
+				data: admin.spiderChartNum
+			}]
+		},
+		options: {
+			legend: {
+				display: false
+			},
+		}
+	});
+}, 1500);
+</script>
+</body>
+</html>

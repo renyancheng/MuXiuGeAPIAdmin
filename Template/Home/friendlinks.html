@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>友情链接 -
+        <?php echo $config['title'];?>
+    </title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/mdclub.css" />
+    <style>
+        .mdui-img-rounded {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<?php require "header.html";?>
+
+<div class="mdui-container mdui-m-t-2" style="width:85%">
+    <div class="mdui-card mdui-m-b-2">
+        <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title">如何申请？</div>
+        </div>
+        <div class="mdui-card-content">
+            申请友情链接非常简单，你只需要将本站加为友情链接，然后按照以下格式发送至我的邮箱即可。<br>
+            <ul>
+                <li>友链名称：</li>
+                <li>友链描述：</li>
+                <li>友链地址：</li>
+                <li>友链头像：</li>
+            </ul>
+            我的邮箱是：
+            <?php echo $config['email'];?>，欢迎申请！<br> （友情链接随机展示，不分前后）
+        </div>
+    </div>
+    <div class="mdui-card" id="link" v-if="links">
+        <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title">友情链接</div>
+        </div>
+        <div class="mdui-card-content">
+            <ul class="mdui-list">
+                <a class="mdui-list-item mdui-ripple" @click.prevent="jump(link.url)" v-for="link in links">
+                    <div class="mdui-list-item-avatar"><img :src="link.picurl" /></div>
+                    <div class="mdui-list-item-content">
+                        <div class="mdui-list-item-title">{{ link.name }}</div>
+                        <div class="mdui-list-item-text mdui-list-item-one-line">{{ link.desc }}</div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<?php require "footer.html";?>
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/index.js"></script>
+<script src="./assets/js/vue.js"></script>
+<script>
+    let friendlink = new Vue({
+        el: '#link',
+        data: {
+            links: [],
+        },
+        methods: {
+            jump: function(url) {
+                jump(url);
+            }
+        },
+        created() {
+            fetch('./Data/api.php?type=getAllLink&mod=rand')
+                .then(response => response.json())
+                .then(json => {
+                    this.links = json.data;
+                })
+        }
+    });
+</script>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户信息 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+</head>
+
+<?php require "header.html";?>
+
+
+		
+		<div class="mc-nav">
+			<buttton class="back mdui-btn mdui-color-theme mdui-ripple" id="back"><i class="mdui-icon mdui-icon-left material-icons">arrow_back</i> 返回</button>
+		</div>
+		
+		<div class="mdui-container mdui-p-x-2">
+			<div class="mdui-card mdui-card-shadow" id="userInfo">
+				<img class="mdui-center mdui-img-circle mdui-m-t-1" :src="info.qqhead" width="100" height="100"/>
+				<ul class="mdui-list">
+					<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">用户名</div>{{ info.username }}</li>
+					<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">邮箱</div>{{ info.email }}</li>
+					<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">QQ号</div>{{ info.qq }}</li>
+					<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">QQ支付二维码</div><img :src="info.qqqrcode" width="30" height="40" v-show="info.qqqrcode" /></li>
+					<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">微信支付二维码</div><img :src="info.vxqrcode" width="30" height="40" v-show="info.vxqrcode" /></li>
+					<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content">支付宝支付二维码</div><img :src="info.aliqrcode" width="30" height="40" v-show="info.aliqrcode" /></li>
+				</ul>
+				
+				<!-- 修改信息Dialog -->
+				<div id="edit_user" class="mc-user-edit mdui-dialog">
+					<div class="mdui-dialog-title mdui-color-theme-a200 mdui-p-y-2">
+						<button class="mdui-btn mdui-btn-icon" mdui-dialog-close><i class="mdui-icon material-icons">close</i></button> 修改信息
+					</div>
+					<div class="mdui-dialog-content mdui-p-x-3 mdui-p-b-2">
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">用户名</label>
+							<input class="mdui-textfield-input" type="text" v-model="info.username" required/>
+							<div class="mdui-textfield-error">用户名不能为空</div>
+						</div>
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">邮箱</label>
+							<input class="mdui-textfield-input" type="email" v-model="info.email" required/>
+							<div class="mdui-textfield-error">邮箱格式不正确</div>
+						</div>
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">QQ号</label>
+							<input class="mdui-textfield-input" type="number" v-model="info.qq" required/>
+							<div class="mdui-textfield-error">QQ格式不正确</div>
+						</div>
+						<div class="mdui-typo">
+							<p>Q：如何快速获取图片链接?<br>A：打开<a href="https://sm.ms/" target="_blank">https://sm.ms/</a>后，上传完图片即可看到链接，复制粘贴过来即可！</p>
+						</div>
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">QQ支付二维码</label>
+							<input class="mdui-textfield-input" type="url" v-model="info.qqqrcode" required/>
+							<div class="mdui-textfield-error">链接格式不正确</div>
+						</div>
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">微信支付二维码</label>
+							<input class="mdui-textfield-input" type="url" v-model="info.vxqrcode" required/>
+							<div class="mdui-textfield-error">链接格式不正确</div>
+						</div>
+						<div class="mdui-textfield">
+							<label class="mdui-textfield-label">支付宝支付二维码</label>
+							<input class="mdui-textfield-input" type="url" v-model="info.aliqrcode" required/>
+							<div class="mdui-textfield-error">链接格式不知道</div>
+						</div>
+						<button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-float-right" @click="update" mdui-dialog-close>保存</button>
+					</div>
+				</div>
+				
+				<button class="mdui-fab mdui-fab-fixed mdui-color-theme-accent mdui-ripple" mdui-dialog="{target: '#edit_user'}"><i class="mdui-icon material-icons">edit</i></button>
+			</div>
+		</div>
+			
+        
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script>
+let userInfo = new Vue({
+	el: '#userInfo',
+	data: {
+		info: [],
+	},
+	methods: {
+		update: function(){
+			fetch('./Data/post.php?type=edit_user&username='+encodeURIComponent(this.info.username)+'&email='+encodeURIComponent(this.info.email)+'&qq='+encodeURIComponent(this.info.qq)+'&qqqrcode='+encodeURIComponent(this.info.qqqrcode)+'&vxqrcode='+encodeURIComponent(this.info.vxqrcode)+'&aliqrcode='+encodeURIComponent(this.info.aliqrcode))
+				.then(response => response.json())
+				.then(json => {
+					mdui.snackbar(json.msg);
+				});
+		}
+	},
+	created (){
+		fetch('./Data/api.php?type=getUserInfo')
+			.then(response => response.json())
+			.then(json => {
+				this.info = json.data;
+			})
+	}
+});
+</script>
+</body>
+</html>

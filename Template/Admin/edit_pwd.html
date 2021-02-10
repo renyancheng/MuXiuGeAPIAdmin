@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>修改密码 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+</head>
+
+<?php require "header.html";?>
+
+
+		
+		<div class="mc-nav" id="back">
+			<buttton class="back mdui-btn mdui-color-theme mdui-ripple"><i class="mdui-icon mdui-icon-left material-icons">arrow_back</i> 返回</button>
+		</div>
+		
+		<div class="mdui-container mdui-p-x-2">
+			<div class="mdui-card mdui-card-shadow mdui-p-x-2" id="edit_pwd">
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">密码</label>
+					<input class="mdui-textfield-input" type="password" v-model="password" required/>
+				</div>
+				<div class="mdui-textfield">
+					<label class="mdui-textfield-label">再次输入密码</label>
+					<input class="mdui-textfield-input" type="password" v-model="password2" required/>
+				</div>
+				<button class="mdui-fab mdui-fab-fixed mdui-color-theme-accent mdui-ripple" @click="update"><i class="mdui-icon material-icons">save</i></button>
+			</div>
+		</div>
+			
+
+        
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script>
+let edit_pwd = new Vue({
+	el: '#edit_pwd',
+	data: {
+		password: '',
+		password2: ''
+	},
+	methods: {
+		update: function(){
+			if(this.password == this.password2){
+    			fetch('./Data/post.php?type=edit_pwd&password='+encodeURIComponent(this.password)+'&password2='+encodeURIComponent(this.password2))
+    				.then(response => response.json())
+    				.then(json => {
+    					mdui.snackbar(json.msg)
+    				})
+			}else{
+				mdui.snackbar('两次密码不一致')
+			}
+		}
+	}
+});
+</script>
+</body>
+</html>

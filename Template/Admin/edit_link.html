@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑友链 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+</head>
+
+<?php require "header.html";?>
+
+
+	<div class="mc-nav" id="back">
+		<buttton class="back mdui-btn mdui-color-theme mdui-ripple"><i class="mdui-icon mdui-icon-left material-icons">arrow_back</i> 返回</button>
+	</div>
+
+	<div class="mdui-container mdui-p-x-2" id="edit_link">
+    	<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链名称</label>
+			<input class="mdui-textfield-input" type="text" name="name" v-model="info.name" required/>
+		</div>
+		<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链简介</label>
+			<textarea class="mdui-textfield-input" rows="3" type="text" name="desc" maxlength="30" v-model="info.desc" required></textarea>
+		</div>
+		<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链地址</label>
+			<input class="mdui-textfield-input" type="text" name="url" v-model="info.url" required/>
+		</div>
+		<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链图片地址</label>
+			<input class="mdui-textfield-input" type="url" name="picurl" v-model="info.picurl" required/>
+		</div>
+		<button class="mdui-fab mdui-fab-fixed mdui-color-theme-accent mdui-ripple" @click="update"><i class="mdui-icon material-icons">check</i></button>
+	</div>
+        
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script>
+let edit_link = new Vue({
+	el: '#edit_link',
+	data: {
+		info: [],
+	},
+	methods: {
+		update: function(){
+			var id = getRequestParam('id');
+			fetch('./Data/post.php', {
+				method: 'POST',
+				headers: {
+       		 		'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: 'type=edit_link&id='+id+'&name='+encodeURIComponent(this.info.name)+'&desc='+encodeURIComponent(this.info.desc)+'&url='+encodeURIComponent(this.info.url)+'&picurl='+encodeURIComponent(this.info.picurl)
+			})
+				.then(response => response.json())
+				.then(json => {
+					mdui.snackbar(json.msg);
+				});
+		}
+	},
+	created (){
+		var id = getRequestParam('id');
+		fetch('./Data/api.php?type=getOneLink&id='+id)
+			.then(response => response.json())
+			.then(json => {
+				this.info = json.data;
+			});
+	}
+});
+</script>
+</body>
+</html>

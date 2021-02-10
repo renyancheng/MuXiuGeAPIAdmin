@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>关于 -
+        <?php echo $config['title'];?>
+    </title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/mdclub.css" />
+</head>
+
+<?php require "header.html";?>
+
+
+<div class="mdui-container" id="about">
+
+    <div class="user mdui-card mdui-card-shadow">
+        <div class="cover" style="background-image: url('assets/images/user_bg.jpg');"></div>
+        <div class="info">
+            <div class="avatar-box">
+                <img :src="info.qqhead" alt="avatar" class="avatar">
+            </div>
+            <div class="mdui-valign mdui-text-color-theme-text mdui-m-l-3 mdui-typo-display-1 mdui-float-right">{{ info.username }}</div>
+        </div>
+    </div>
+
+    <!-- <div class="mdui-card mdui-center">
+  		<div class="mdui-card-media">
+    		<img src="assets/images/background.png" height="150"/>
+    		<div class="mdui-card-menu">
+      			<a class="mdui-btn mdui-btn-icon mdui-text-color-white" :href="info.href"><i class="mdui-icon material-icons">group_add</i></a>
+    		</div>
+    		<div class="mdui-card-media-covered">
+      			<div class="mdui-card-primary">
+        			<div class="mdui-card-primary-title">{{ info.username }}</div>
+        			<div class="mdui-card-primary-subtitle">MXGAPI站长</div>
+      			</div>
+    		</div>
+  		</div>
+	</div> -->
+    <!-- <div class="mdui-m-y-2">
+		<button class="mdui-btn mdui-btn-icon mdui-color-theme mdui-btn-active mdui-center " mdui-menu="{target:'#pay',position:'bottom',align:'center'}" style="width:60px;height:60px;">赏</button>
+		<div class="mdui-menu mdui-m-t-5" id="pay">
+			<div class="mdui-row">
+  				<div class="mdui-col-xs-4" v-show="info.qqqrcode">
+  					<img :src="info.qqqrcode" style="width:50px;"/>
+  				</div>
+  				<div class="mdui-col-xs-4" v-show="info.vxqrcode">
+  					<img :src="info.vxqrcode" style="width:50px;"/>
+  				</div>
+  				<div class="mdui-col-xs-4" v-show="info.aliqrcode">
+  					<img :src="info.aliqrcode" style="width:50px;"/>
+  				</div>
+  			</div>
+		</div>
+	</div> -->
+    <div class="mdui-card mdui-m-t-2">
+        <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title">给我打钱:D（请备注QQ）</div>
+        </div>
+        <div class="mdui-card-content">
+            <div class="mdui-row mdui-text-center">
+                <div class="mdui-col-md-4" v-show="info.qqqrcode">
+                    <img :src="info.qqqrcode" style="width:300px;" />
+                </div>
+                <div class="mdui-col-md-4" v-show="info.vxqrcode">
+                    <img :src="info.vxqrcode" style="width:300px;" />
+                </div>
+                <div class="mdui-col-md-4" v-show="info.aliqrcode">
+                    <img :src="info.aliqrcode" style="width:300px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php require "footer.html";?>
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/index.js"></script>
+<script src="./assets/js/vue.js"></script>
+<script>
+    let about = new Vue({
+        el: '#about',
+        data: {
+            info: [],
+        },
+        created() {
+            fetch('./Data/api.php?type=getUserInfo')
+                .then(response => response.json())
+                .then(json => {
+                    this.info = json.data;
+                })
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>添加友链 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+   	<link rel="stylesheet" href="./assets/css/preview.css"/>
+</head>
+
+<?php require "header.html";?>
+
+<div class="mc-nav" id="back">
+		<buttton class="back mdui-btn mdui-color-theme mdui-ripple"><i class="mdui-icon mdui-icon-left material-icons">arrow_back</i> 返回</button>
+	</div>
+
+	<div class="mdui-container mdui-p-x-2" id="add_link">
+    	<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链名称</label>
+			<input class="mdui-textfield-input" type="text" v-model="info.name" required/>
+		</div>
+		<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链简介</label>
+			<textarea class="mdui-textfield-input" rows="3" type="text" maxlength="30" v-model="info.desc" required></textarea>
+		</div>
+		<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链地址</label>
+			<input class="mdui-textfield-input" type="text" v-model="info.url" required/>
+		</div>
+		<div class="mdui-textfield">
+			<label class="mdui-textfield-label">友链图片地址</label>
+			<input class="mdui-textfield-input" type="url" v-model="info.picurl" required/>
+		</div>
+		<button class="mdui-fab mdui-fab-fixed mdui-color-theme-accent mdui-ripple" @click="addLink"><i class="mdui-icon material-icons">add</i></button>
+	</div>
+        
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script>
+let add_link = new Vue({
+	el: '#add_link',
+	data: {
+		info: [],
+	},
+	methods: {
+		addLink: function(){
+			if(this.info.name && this.info.desc && this.info.url && this.info.picurl){
+    			fetch('./Data/post.php', {
+    				method: 'POST',
+    				headers: {
+           		 		'Content-Type': 'application/x-www-form-urlencoded'
+    				},
+    				body: 'type=add_link&name='+encodeURIComponent(this.info.name)+'&desc='+encodeURIComponent(this.info.desc)+'&url='+encodeURIComponent(this.info.url)+'&picurl='+encodeURIComponent(this.info.picurl)
+    			})
+    				.then(response => response.json())
+    				.then(json => {
+    					mdui.snackbar(json.msg);
+    					this.info = [];
+    				});
+    		}else{
+    			mdui.snackbar('请输入完整');
+    		}
+		}
+	}
+});
+</script>
+</body>
+</html>

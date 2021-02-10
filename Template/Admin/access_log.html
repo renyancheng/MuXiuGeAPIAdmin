@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>访问日志 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+</head>
+
+<?php require "header.html";?>
+
+
+<div class="mdui-container mdui-p-x-2">
+	<div class="mdui-table-fluid mc-datatable" id="table">
+      	<table class="mdui-table">
+        	<thead>
+          		<tr class="checked">
+            		<th style="width:200px;">时间</th>
+            		<th class="ip" style="width:200px;">IP</th>
+            		<th style="width:300px;">地址</th>
+            		<th style="width:130px;">协议</th>
+            		<th style="width:80px;">方法</th>
+            		<th style="width:400px;">UA</th>
+            		<th class="actions">
+						<div class="mc-pagination">
+                            <button mdui-menu="{target:'#pagination-setting-menu'}" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '分页设置'}"><i class="mdui-icon material-icons">more_vert</i></button>
+                            <div class="mdui-menu menu" id="pagination-setting-menu">
+                            	<div class="label mdui-text-color-theme-secondary">每页显示行数
+                            	</div>
+                            	<div class="mdui-btn-group">
+                            		<button type="button" class="page mdui-btn mdui-text-color-theme-text">10</button>
+                            		<button type="button" class="page mdui-btn mdui-text-color-theme-text mdui-btn-active">25</button>
+                            		<button type="button" class="page mdui-btn mdui-text-color-theme-text">50</button>
+                            		<button type="button" class="page mdui-btn mdui-text-color-theme-text">100</button>
+                            	</div>
+                            </div>
+                    	</div>
+                  	</th>
+          		</tr>
+        	</thead>
+        	<tbody class="mdui-typo">
+         		<tr v-for="access in accesses">
+         			<td style="width:200px;">{{access.time}}</td>
+                	<td @click="getIpAddress(access.ip)" style="width:200px;"><code>{{access.ip}}</code></td>
+                	<td style="width:300px;">{{access.host}}</td>
+                	<td style="width:130px;"><code>{{access.protocol}}</code></td>
+                	<td style="width:80px;"><code>{{access.method}}</code></td>
+					<td style="width:500px;">{{access.user_agent}}</td>
+					<!-- <td style="width:100px;"></td> -->
+          		</tr>
+        	</tbody>
+      	</table>
+    </div>
+</div>  
+
+        
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script src="./assets/js/sweetalert.min.js"></script>
+<script>
+var table = new Vue({
+	el: '#table',
+	data: {
+		accesses: []
+	},
+	methods: {
+		getIpAddress: function(ip){
+			swal("查询中......", ip , {
+  					icon: "info",
+  					buttons:false
+  			});
+   			fetch('./Data/api.php?type=getIpAddress&ip='+ip)
+				.then(response => response.json())
+				.then(json => {
+					var code = json.code;
+					var msg = json.msg;
+					if(code == 0){
+    					swal(msg, json.data , {
+      						icon: "success",
+      						buttons:false
+      					});
+  					}else{
+  						swal(msg, ip , {
+  							icon: "error",
+  							buttons:false
+  						});
+  					}
+				});
+		}
+	},
+	created (){
+		fetch('./Data/api.php?type=getAccessInfo')
+			.then(response => response.json())
+			.then(json => {
+				this.accesses = json.data;
+			})
+	}
+});
+
+$('.page').click(function(){
+	var num = $(this).text();
+	$(this).siblings('button').removeClass('mdui-btn-active');
+	$(this).addClass('mdui-btn-active');
+	fetch('./Data/api.php?type=getAccessInfo&num='+num)
+		.then(response => response.json())
+		.then(json => {
+			table.accesses = json.data;
+		});
+});
+
+</script>
+</body>
+</html>

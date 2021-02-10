@@ -1,0 +1,84 @@
+<?php
+if(isAdmin()){
+	jump('?action=admin');
+}
+?>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>后台登录 -  <?php echo $config['title'];?></title>
+        <meta charset="utf-8" />
+        <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+        <meta name="description" content="<?php echo $config['description'];?>" />
+        <link rel="icon" href="<?php echo $config['favicon'];?>" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="./assets/css/mdui.min.css" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <style>
+            * {
+                margin: 0;
+            }
+            
+            html,
+            body {
+                min-height: 100vh;
+            }
+            
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .mdui-card {
+                width: 300px;
+                border-radius: 10px;
+            }
+            
+            .mdui-btn {
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+
+    <body class="mdui-theme-accent-blue mdui-color-blue-a200">
+        <div class="mdui-container-fluid">
+            <div class="mdui-card mdui-shadow-24">
+                <!--<div id="loading"></div>-->
+                <div class="mdui-card-primary mdui-text-center">
+                    <div class="mdui-card-primary-title">登录</div>
+                    <div class="mdui-card-primary-subtitle">你正在该站点上登录！</div>
+                </div>
+                <div class="mdui-card-content">
+                    <div class="mdui-textfield mdui-textfield-floating-label">
+                        <label class="mdui-textfield-label">用户名</label>
+                        <input class="mdui-textfield-input" type="text" id="username" required>
+                    </div>
+                    <div class="mdui-textfield mdui-textfield-floating-label">
+                        <label class="mdui-textfield-label">密码</label>
+                        <input class="mdui-textfield-input" type="password" id="password" required>
+                    </div>
+                </div>
+                <div class="mdui-card-actions">
+                    <button class="mdui-btn mdui-btn-raised mdui-float-right mdui-color-blue-accent" id="submit">登录</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mdui-dialog" id="loading">
+            <div class="mdui-m-y-2 mdui-m-x-1">
+                <center style="font-size:17px">加载中......</center>
+                <br>
+                <div class="mdui-progress">
+                    <div class="mdui-progress-indeterminate"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./assets/js/jquery.min.js"></script>
+        <script src="./assets/js/mdui.min.js"></script>
+        <script src="./assets/js/index.js"></script>
+    </body>
+
+    </html>

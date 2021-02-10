@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo $result['name']." - ".$config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $apiSelect['desc'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/css/mdclub.css"/>
+    <link rel="stylesheet" href="./assets/css/highlight.min.css">
+	<script src="./assets/js/highlight.min.js"></script>
+</head>
+
+<?php require "header.html";?>
+   
+  		<div class="mdui-container-fluid mdui-m-b-2" id="doc">
+  			<div class="mdui-text-center mdui-color-theme-a200 mdui-text-color-white mdui-m-b-2" style="padding-top:80px;padding-bottom:80px;">
+  				<div class="mdui-typo-display-1">{{ info.name }}</div>
+  				<div class="mdui-typo-subtitle">{{ info.desc }}</div>
+        	</div>
+    		<nav class="doc-toc mdui-text-color-theme-accent mdui-m-x-2"> 
+    	    	<ul> 
+    	     		<li><a href="javascript:scroll('#api_explanation');">接口说明</a>
+        	      		<ul> 
+        	       			<li><a href="javascript:scroll('#request_explanation');">请求说明</a></li> 
+        	       			<li><a href="javascript:scroll('#request_param');">请求参数</a></li> 
+        	       			<li><a href="javascript:scroll('#return_param');">返回参数</a></li> 
+        	       			<li><a href="javascript:scroll('#return_example');">返回示例</a></li>
+        	      		</ul>
+    	      		</li>
+    	      		<li><a href="javascript:scroll('#error_code');">错误码</a>
+    	      			<ul> 
+        	       			<li><a href="javascript:scroll('#error_code_status');">状态码说明</a></li> 
+        	       			<li><a href="javascript:scroll('#error_code_system');">系统级错误</a></li>
+        	      		</ul>
+    	      		</li>
+    	      		<li><a href="javascript:scroll('#example_code');">PHP代码示例</a></li>
+    	    	</ul> 
+    	   </nav>
+        	<div class="mdui-p-x-2 mdui-typo">
+        	   <div class="mdui-typo-headline mdui-text-color-theme-a400 mdui-m-y-2" id="api_explanation">接口说明</div>
+    			<div class="mdui-chip" id="request_explanation">
+                    	<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">short_text</i></span> <span class="mdui-chip-title">请求说明</span>
+    			</div>
+    			<br>
+    			<div class="mdui-row">
+    				<div class="mdui-col-sm-6">
+                        <div class="mdui-m-t-2">
+                          	<p>
+                            	<b>请求地址：</b><br>
+                                <a :href="websetting.url+'API/'+info.url">{{ websetting.url }}API/{{ info.url }}</a>
+                                <button class="mdui-btn mdui-btn-icon mdui-ripple url" :data-clipboard-text="websetting.url+'API/'+info.url" mdui-tooltip="{content: 'copy'}"><i class="mdui-icon material-icons">content_copy</i></button><br>
+                                <b>返回格式：</b><br>
+                                <kbd>{{ info.format }}<br></kbd>
+                               	<b>请求方式：</b><br>
+                                <kbd>{{ info.method }}<br></kbd>
+                                <b>请求示例：</b><br>
+                                <a :href="websetting.url+'API/'+info.example_url">{{ websetting.url }}API/{{ info.example_url }}</a>
+                                <button class="mdui-btn mdui-btn-icon mdui-ripple url" :data-clipboard-text="websetting.url+'API/'+info.example_url" mdui-tooltip="{content: 'copy'}"><i class="mdui-icon material-icons">content_copy</i></button><br>
+                          	</p>
+                       	</div>
+                  	</div>
+                  	<div class="mdui-col-sm-6">
+                       	<div class="mdui-chip mdui-m-t-2" id="return_example">
+                     	 	<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">short_text</i></span> <span class="mdui-chip-title">返回示例</span>
+                    	</div>
+                   		<div class="mdui-m-t-2" v-if="info.return">
+                     	  	<highlightjs class="mdui-shadow-1" :code="info.return" />
+                    	</div>
+                    </div>
+            	</div>
+               	<div class="mdui-row">
+               		<div class="mdui-col-sm-6">
+                       	<div class="mdui-chip mdui-m-t-2" id="request_param">
+                          	<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">short_text</i></span> <span class="mdui-chip-title">请求参数</span>
+                        </div>
+                        <div class="mdui-table-fluid mdui-m-t-2 mdui-typo">
+                           	<table class="mdui-table mdui-table-hoverable">
+                             	<thead>
+               		  				<tr>
+                       	  				<th>参数名称</th>
+                                        <th>参数类型</th>
+                                       	<th>是否必填</th>
+                                        <th>备注内容</th>
+                                	</tr>
+                             	</thead>
+                               	<tbody>
+                            		<tr v-for="request_parameter in info.request_parameter">
+                            			<td><code>{{ request_parameter.name }}</code></td>
+                            			<td><code>{{ request_parameter.type }}</code></td>
+                            			<td><code>{{ request_parameter.required }}</code></td>
+                            			<td>{{ request_parameter.info }}</td>
+                            		</tr>
+                         		</tbody>
+                       		</table>
+                   		</div>
+                   	</div>
+                   	<div class="mdui-col-sm-6">
+                       	<div class="mdui-chip mdui-m-t-2" id="return_param">
+                           	<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">short_text</i></span> <span class="mdui-chip-title">返回参数</span>
+                    	</div>
+                      	<div class="mdui-table-fluid mdui-m-t-2 mdui-typo">
+                          	<table class="mdui-table mdui-table-hoverable">
+                             	<thead>
+                                 	<tr>
+                                      	<th>参数名称</th>
+                                        <th>参数类型</th>
+                                        <th>参数说明</th>
+                                  	</tr>
+                             	</thead>
+                          		<tbody>
+                              		<tr v-for="return_parameter in info.return_parameter">
+                              			<td><code>{{ return_parameter.name }}</code></td>
+                              			<td><code>{{ return_parameter.type }}</code></td>
+                              			<td>{{ return_parameter.msg }}</td>
+                              		</tr>
+                         		</tbody>
+                      		</table>
+                  		</div>
+                  	</div>
+          		</div>
+            	<div class="mdui-row">
+            		<div class="mdui-col-sm-6">
+             			<div class="mdui-typo-headline mdui-text-color-theme-a400 mdui-m-y-2" id="error_code">错误码</div>
+             			<div class="mdui-chip mdui-m-b-2" id="error_code_status">
+                    		<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">short_text</i></span> <span class="mdui-chip-title">状态码说明</span>
+    					</div>
+                     	 <div class="mdui-table-fluid">
+                  			<table class="mdui-table mdui-table-hoverable">
+                    			<thead>
+                     	 			<tr>
+                        				<th>名称</th>
+                        				<th>说明</th>
+                      				</tr>
+                    			</thead>
+                    			<tbody>
+                            		<tr v-for="error_code in info.error_code">
+                            			<td><code>{{ error_code.code }}</code></td>
+                            			<td>{{ error_code.msg }}</td>
+                            		</tr>
+                    			</tbody>
+                  			</table>
+                		</div>
+                		<div class="mdui-chip mdui-m-b-2" id="error_code_system">
+                    		<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">short_text</i></span> <span class="mdui-chip-title">系统级错误</span>
+    					</div>
+                     	 <div class="mdui-table-fluid">
+                  			<table class="mdui-table mdui-table-hoverable">
+                    			<thead>
+                     	 			<tr>
+                        				<th>名称</th>
+                        				<th>说明</th>
+                      				</tr>
+                    			</thead>
+                    			<tbody>
+                            		<tr>
+                            			<td><code>400</code></td>
+                            			<td>请求错误！</td>
+                            		</tr>
+                            		<tr>
+                            			<td><code>403</code></td>
+                            			<td>请求被服务器拒绝！</td>
+                            		</tr>
+                            		<tr>
+                            			<td><code>405</code></td>
+                            			<td>客户端请求的方法被禁止！</td>
+                            		</tr>
+                            		<tr>
+                            			<td><code>408</code></td>
+                            			<td>请求时间过长！</td>
+                            		</tr>
+                            		<tr>
+                            			<td><code>500</code></td>
+                            			<td>服务器内部出现错误！</td>
+                            		</tr>
+                            		<tr>
+                            			<td><code>501</code></td>
+                            			<td>服务器不支持请求的功能，无法完成请求！</td>
+                            		</tr>
+                            		<tr>
+                            			<td><code>503</code></td>
+                            			<td>系统维护中！</td>
+                            		</tr>
+                    			</tbody>
+                  			</table>
+                		</div>
+                	</div>
+                	<div class="mdui-col-sm-6" v-if="info.PHP_example">
+                		<div class="mdui-typo-headline mdui-text-color-theme-a400 mdui-m-y-2" id="example_code">PHP代码示例</div>
+              			<highlightjs class="mdui-shadow-1" language="php" :code="info.PHP_example" />
+              		</div>
+      			</div>
+  			</div>
+		</div>
+		
+
+<?php require "footer.html";?>
+
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/index.js"></script>
+<script src="./assets/js/vue.js"></script>
+<script src="./assets/js/clipboard.min.js"></script>
+<script src="./assets/js/smooth-scroll.polyfills.min.js"></script>
+<script>
+/* 注册一个highlightjs插件 */
+Vue.use(hljs.vuePlugin);
+
+let doc = new Vue({
+	el: '#doc',
+	data: {
+		info: [],
+		websetting: [],
+	},
+	created (){
+		var id = getRequestParam('id');
+		fetch('./Data/api.php?type=getOneApi&id='+id)
+			.then(response => response.json())
+			.then(json => {
+				this.info = json.data;
+				/* 请求参数 */
+				var request_parameter = json.data.request_parameter;
+				this.info.request_parameter = JSON.parse(request_parameter).data;
+				/* 返回参数 */
+				var return_parameter = json.data.return_parameter;
+				this.info.return_parameter = JSON.parse(return_parameter).data;
+				var return_parameter_new = '';
+				/* 返回状态码 */
+				var error_code = json.data.error_code;
+				this.info.error_code = JSON.parse(error_code).data;
+			});
+		fetch('./Data/api.php?type=getWebSetting')
+			.then(response => response.json())
+			.then(json => {
+				this.websetting = json.data;
+			});
+	}
+});
+
+var clipboard = new ClipboardJS('.url');
+clipboard.on('success', function(e) {
+	mdui.snackbar("复制成功！");	
+    e.clearSelection();
+});
+clipboard.on('error', function(e) {
+	mdui.snackbar("复制失败！");
+});
+</script>
+</body>
+</html>

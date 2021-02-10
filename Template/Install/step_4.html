@@ -1,0 +1,47 @@
+<?php
+session_start();
+$_SESSION['install_step'] = 1;
+file_put_contents('./Core/install.lock', true);
+?>
+<html>
+<head>
+    <title>安装完成！</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="install,安装,API管理系统" />
+    <meta name="description" content="API管理系统安装页面" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/mdclub.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+</head>
+<body class="mdui-theme-primary-blue mdui-theme-accent-blue mdui-appbar-with-toolbar">
+
+	<div class="mdui-appbar mdui-appbar-fixed">
+  		<div class="mdui-toolbar mdui-color-white">
+    		<a href="javascript:;" class="mdui-typo-headline">安装完成！</a>
+    		<div class="mdui-toolbar-spacer"></div>
+  		</div>
+  		<div class="mdui-progress">
+			<div class="mdui-progress-determinate" style="width: 100%;"></div>
+		</div>
+	</div>
+	
+    <div class="mdui-container mdui-p-x-2">
+    	<div class="mdui-card mdui-m-y-2 mdui-typo">
+    		<div class="mdui-card-primary">
+    			<div class="mdui-card-primary-title">完成！</div>
+    		</div>
+    		<div class="mdui-card-content">
+    			<p>还沉浸在安装过程中？不过现在已经完成了，您现在可以访问前台，也可以到后台编辑更多信息。</p>
+    			<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mdui-m-t-2" href="?">去前台</a>
+    			<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mdui-m-t-2" href="?action=admin&page=websetting">去后台设置</a>
+    		</div>
+    	</div>
+	</div>
+
+
+<script src="./assets/js/jquery.min.js"></script>
+<script src="./assets/js/mdui.min.js"></script>
+<script src="./assets/js/vue.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理公告 - <?php echo $config['title'];?></title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="<?php echo $config['keywords'];?>" />
+    <meta name="description" content="<?php echo $config['description'];?>" />
+    <link rel="icon" href="<?php echo $config['favicon'];?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./assets/css/mdui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+   	<link rel="stylesheet" href="./assets/css/mdclub.css"/>
+</head>
+
+<?php require "header.html";?>
+
+       	<div class="mdui-container mdui-p-x-2 mdui-p-b-0" id="control_post">
+			<div class="mdui-card mdui-m-b-2">
+				<div class="mdui-card-content">
+					<div class="mdui-textfield">
+						<label class="mdui-textfield-label">设置绑定公告ID</label>
+						<input class="mdui-textfield-input" type="number" v-model="websetting.post_id" required/>
+						<div class="mdui-textfield-helper">设置为-1则关闭公告</div>
+						<div class="mdui-textfield-error">ID不能为空</div>
+					</div>
+					<button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-float-right mdui-m-b-2" @click="changePostId" mdui-dialog-close>设置</button>	
+				</div>
+			</div>
+
+			<div class="mdui-card" v-if="posts">
+				<div class="mdui-card-content">
+					<ul class="mdui-list">
+						<li class="mdui-list-item mdui-ripple" v-for="(post,index) in posts" @click="editPost(post.id)" mdui-dialog="{target:'#edit_post'}">
+							<div class="mdui-list-item-content">
+								<div class="mdui-list-item-title mdui-list-item-one-line">ID:{{ post.id }} {{ post.title }}<div class="mdui-float-right">{{ getLocalTime(post.time) }}</div></div>
+								<div class="mdui-list-item-text mdui-list-item-two-line">{{ post.content }}</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+ 	 		
+ 	 		
+ 	 		<!-- 修改公告Dialog -->
+    		<div id="edit_post" class="mc-user-edit mdui-dialog">
+           		<div class="mdui-dialog-title mdui-color-theme-a200 mdui-p-y-2">
+            		<button class="mdui-btn mdui-btn-icon" mdui-dialog-close><i class="mdui-icon material-icons">close</i></button> 修改公告
+            	</div>
+           		<div class="mdui-dialog-content mdui-p-x-3 mdui-p-b-2">
+        			<div class="mdui-textfield">
+        				<label class="mdui-textfield-label">公告标题</label>
+        				<input class="mdui-textfield-input" type="text" v-model="edit_post.title" required/>
+        				<div class="mdui-textfield-error">公告标题不能为空</div>
+        			</div>
+        			<div class="mdui-textfield">
+        				<label class="mdui-textfield-label">公告内容</label>
+  						<textarea class="mdui-textfield-input" rows="12" v-model="edit_post.content"></textarea>
+					</div>
+					<div class="mdui-textfield">
+						<label class="mdui-textfield-label">公告图标</label>
+						<select class="mdui-select" v-model="edit_post.icon" style="width:100%;">
+							<option value="info">信息</option>
+  							<option value="success">成功</option>
+  							<option value="warning">警告</option>
+  							<option value="error">失败</option>
+						</select>
+					</div>
+					<br>
+        			<button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-float-right" @click="updatePost" mdui-dialog-close>保存</button>
+        			<button class="mdui-btn mdui-color-red-accent mdui-btn-raised mdui-float-right" @click="deletePost" mdui-dialog-close>删除</button>
+           		</div>
+           	</div>
+           	<!-- 添加公告Dialog -->
+    		<div id="add_post" class="mc-user-edit mdui-dialog">
+           		<div class="mdui-dialog-title mdui-color-theme-a200 mdui-p-y-2">
+            		<button class="mdui-btn mdui-btn-icon" mdui-dialog-close><i class="mdui-icon material-icons">close</i></button> 添加公告
+            	</div>
+           		<div class="mdui-dialog-content mdui-p-x-3 mdui-p-b-2">
+        			<div class="mdui-textfield">
+        				<label class="mdui-textfield-label">公告标题</label>
+        				<input class="mdui-textfield-input" type="text" v-model="add_post.title" required/>
+        				<div class="mdui-textfield-error">公告标题不能为空</div>
+        			</div>
+        			<div class="mdui-textfield">
+        				<label class="mdui-textfield-label">公告内容</label>
+  						<textarea class="mdui-textfield-input" rows="12" v-model="add_post.content"></textarea>
+					</div>
+					<div class="mdui-textfield">
+						<label class="mdui-textfield-label">公告图标</label>
+						<select class="mdui-select" v-model="add_post.icon" style="width:100%;">
+							<option value="info">信息</option>
+  							<option value="success">成功</option>
+  							<option value="warning">警告</option>
+  							<option value="error">失败</option>
+						</select>
+					</div>
+					<br>
+        			<button class="mdui-btn mdui-color-theme-accent mdui-btn-raised mdui-float-right" @click="addPost" mdui-dialog-close>添加</button>
+           		</div>
+           	</div>
+           	<button class="mdui-fab mdui-fab-fixed mdui-color-theme-accent mdui-ripple" mdui-dialog="{target:'#add_post'}"><i class="mdui-icon material-icons">add</i></button>
+        </div>
+
+<?php require "footer.html";?>
+
+<script src="./assets/js/vue.js"></script>
+<script src="./assets/js/sweetalert.min.js"></script>
+<script>
+let control_post = new Vue({
+	el: '#control_post',
+	data: {
+		posts: [],
+		edit_post: [],
+		add_post: [],
+		websetting: []
+	},
+	methods: {
+		editPost: function(id){
+			fetch('./Data/api.php?type=getOnePost&id='+id)
+				.then(response => response.json())
+				.then(json => {
+					this.edit_post = json.data;
+				})
+		},
+		updatePost: function(){
+			fetch('./Data/post.php', {
+				method: 'POST',
+				headers: {
+       		 		'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: 'type=edit_post&id='+this.edit_post.id+'&title='+encodeURIComponent(this.edit_post.title)+'&content='+encodeURIComponent(this.edit_post.content)+'&icon='+encodeURIComponent(this.edit_post.icon)
+			})
+				.then(response => response.json())
+				.then(json => {
+					mdui.snackbar(json.msg);
+					if(json.code == 0){
+    					setTimeout(function(){
+    						window.location.reload();
+    					},1000);
+					}
+				})
+		},
+		deletePost: function(){
+			var x = confirm('确定要删除此公告？');
+			if(x){
+				if(this.websetting.post_id == this.edit_post.id){
+					mdui.snackbar('不能删除当前使用中的公告');
+					throw('不能删除当前使用中的公告');
+				}
+    			fetch('./Data/post.php', {
+    				method: 'POST',
+    				headers: {
+      	 		 		'Content-Type': 'application/x-www-form-urlencoded'
+    				},
+    				body: 'type=del_post&id='+this.edit_post.id
+    			})
+    				.then(response => response.json())
+    				.then(json => {
+    					mdui.snackbar(json.msg)
+    					if(json.code == 0){
+    						setTimeout(function(){
+    							window.location.reload();
+    						},1000);
+    					}
+    				})
+			}
+		},
+		addPost: function(){
+			fetch('./Data/post.php', {
+				method: 'POST',
+				headers: {
+       		 		'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: 'type=add_post&title='+encodeURIComponent(this.add_post.title)+'&content='+encodeURIComponent(this.add_post.content)+'&icon='+encodeURIComponent(this.add_post.icon)
+			})
+				.then(response => response.json())
+				.then(json => {
+					mdui.snackbar(json.msg);
+					if(json.code == 0){
+    					setTimeout(function(){
+    						window.location.reload();
+    					},1000);
+					}
+				})
+		},
+		changePostId: function(){
+			fetch('./Data/post.php', {
+				method: 'POST',
+				headers: {
+       		 		'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: 'type=change_post_id&id='+this.websetting.post_id
+			})
+				.then(response => response.json())
+				.then(json => {
+					mdui.snackbar(json.msg);
+				})
+		},
+		getLocalTime: function(nS){
+			return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+		}
+	},
+	created (){
+		fetch('./Data/api.php?type=getAllPost')
+			.then(response => response.json())
+			.then(json => {
+				this.posts = json.data;
+			});
+		fetch('./Data/api.php?type=getWebSetting')
+			.then(response => response.json())
+			.then(json => {
+				this.websetting = json.data;
+			});
+	}
+});
+</script>
+</body>
+</html>
