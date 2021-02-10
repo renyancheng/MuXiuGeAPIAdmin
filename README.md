@@ -18,7 +18,7 @@
 [api.mwind.top](https://api.mwind.top/)
 
 ## Docs
-[doc.muxiuge.cn](https://doc.muxiuge.cn/)
+[doc.muxiuge.cn](http://doc.muxiuge.cn/)
 
 ## 用到的技术
 + MDUI框架
