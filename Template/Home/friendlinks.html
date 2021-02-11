@@ -23,8 +23,8 @@
 
 <div class="mdui-container mdui-m-t-2" style="width:85%">
     <div class="mdui-row" id="link">
-        <div class="mdui-col-sm-6 mdui-col-md-4" v-if="links">
-            <div class="mdui-card mdui-m-y-1 mdui-hoverable" v-for="link in links" @click.prevent="jump(link.url)">
+        <div class="mdui-col-sm-6 mdui-col-md-4" v-if="links" v-for="link in links">
+            <div class="mdui-card mdui-m-y-1 mdui-hoverable" @click.prevent="jump(link.url)">
                 <div class="mdui-card-header">
                     <img class="mdui-card-header-avatar" :src="link.picurl">
                     <div class="mdui-card-header-title">{{ link.name }}</div>
