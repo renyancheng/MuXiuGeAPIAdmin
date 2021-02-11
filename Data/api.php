@@ -363,6 +363,9 @@ switch($type){
 		
 	/* 接口调用排行榜 */
 	case 'getApiAccessList':
+		if(!isAdmin()){
+			jsonError(-1, '未登录到后台');
+		}
 		$sql = 'SELECT name,access FROM `mxgapi_api` order by access desc limit 5';
 		$result = $db->query($sql);
 		if($result){
