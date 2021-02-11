@@ -22,36 +22,24 @@
 <?php require "header.html";?>
 
 <div class="mdui-container mdui-m-t-2" style="width:85%">
-    <div class="mdui-card mdui-m-b-2">
-        <div class="mdui-card-primary">
-            <div class="mdui-card-primary-title">如何申请？</div>
+    <div class="mdui-row" id="link">
+        <div class="mdui-col-sm-6 mdui-col-md-4" v-if="links">
+            <div class="mdui-card mdui-m-y-1 mdui-hoverable" v-for="link in links" @click.prevent="jump(link.url)">
+                <div class="mdui-card-header">
+                    <img class="mdui-card-header-avatar" :src="link.picurl">
+                    <div class="mdui-card-header-title">{{ link.name }}</div>
+                    <div class="mdui-card-header-subtitle">{{ link.desc }}</div>
+                </div>
+            </div>
         </div>
-        <div class="mdui-card-content">
-            申请友情链接非常简单，你只需要将本站加为友情链接，然后按照以下格式发送至我的邮箱即可。<br>
-            <ul>
-                <li>友链名称：</li>
-                <li>友链描述：</li>
-                <li>友链地址：</li>
-                <li>友链头像：</li>
-            </ul>
-            我的邮箱是：
-            <?php echo $config['email'];?>，欢迎申请！<br> （友情链接随机展示，不分前后）
-        </div>
-    </div>
-    <div class="mdui-card" id="link" v-if="links">
-        <div class="mdui-card-primary">
-            <div class="mdui-card-primary-title">友情链接</div>
-        </div>
-        <div class="mdui-card-content">
-            <ul class="mdui-list">
-                <a class="mdui-list-item mdui-ripple" @click.prevent="jump(link.url)" v-for="link in links">
-                    <div class="mdui-list-item-avatar"><img :src="link.picurl" /></div>
-                    <div class="mdui-list-item-content">
-                        <div class="mdui-list-item-title">{{ link.name }}</div>
-                        <div class="mdui-list-item-text mdui-list-item-one-line">{{ link.desc }}</div>
-                    </div>
-                </a>
-            </ul>
+        
+        <div class="mc-empty" style="background-image: url('assets/css/994575169312f0027615406d265202f2.png');" v-if="!links">
+            <div class="title">
+                尚未任何友链
+            </div>
+            <div class="description">
+                添加友情链接后，将显示在这里
+            </div>
         </div>
     </div>
 </div>
