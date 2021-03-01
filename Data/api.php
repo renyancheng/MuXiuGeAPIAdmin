@@ -302,8 +302,7 @@ switch($type){
 		if(!isAdmin()){
 			jsonError(-1, '未登录到后台');
 		}
-		$num = intval($_REQUEST['num']);
-		if(!$num) $num = 25;
+		$num = intval($_REQUEST['num'] ?? '25');
 		$result = $db->query("SELECT * FROM `mxgapi_access` order by 1 desc limit ".$num)->fetch_all(MYSQLI_ASSOC);
 		if(!$result){
 			jsonError(-1, '数据获取失败！');
