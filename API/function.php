@@ -1,12 +1,11 @@
 <?php
-
 /*
  * 添加访问记录
  * @return bool 添加是否成功
  */
 function addAccess()
 {
-	require '../Core/Database/connect.php';
+	require __DIR__ . '/../Core/Database/connect.php';
 
 	$host = $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"] . '?' . $_SERVER['QUERY_STRING'];
 	$user_agent = $_SERVER["HTTP_USER_AGENT"];
@@ -29,7 +28,7 @@ function addAccess()
  */
 function addApiAccess($id)
 {
-	require '../Core/Database/connect.php';
+	require __DIR__ . '/../Core/Database/connect.php';
 	if (intval($id)) {
 		$get_access = $db->query("SELECT access FROM `mxgapi_api` WHERE `id` = '{$id}';");
 		if ($get_access) {
