@@ -168,9 +168,9 @@ switch ($req["type"]) {
 		if (trim($req["username"]) == $result["username"] && trim($req["password"]) == $result["password"]) {
 			$_SESSION['login'] = 'admin';
 			$ip = $_SERVER["REMOTE_ADDR"];
-			$address = curl('https://api.oioweb.cn/api/ipaddress.php?host=' . $ip, 'GET', 0, 0);
+			$address = curl('https://api.muxiaoguo.cn/api/ip?type=b&ip=' . $ip, 'GET', 0, 0);
 			$address = json_decode($address, true);
-			$address = $address['disp'];
+			$address = $address['data']['Geographical_location'];
 			$time = time();
 			if ($address && $ip) {
 				$addLog = $db->query("INSERT INTO `mxgapi_login_log` (`id`, `ip`, `address`, `time`) VALUES (NULL, '{$ip}', '{$address}', '{$time}');");
