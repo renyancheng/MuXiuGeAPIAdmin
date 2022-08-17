@@ -14,6 +14,9 @@
 + 接口调用统计
 等等等...更多功能等你来探索！
 
+## 常见的问题
+[Wiki](https://github.com/mufeng233/MuXiuGeAPIAdmin/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+
 ## Demo 
 [api.mwind.top](https://api.mwind.top/)
 
