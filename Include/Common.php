@@ -1,5 +1,379 @@
 <?php
+/* 
+ * 应用公共文件
+ */
+
+
 /*
- Encode by www.phpen.cn 
-*/
- function jsonError($code, $msg) { die(json_encode(array("\x63\x6f\x64\145" => $code, "\155\163\147" => $msg), 320 | JSON_PRETTY_PRINT)); } function json($code, $msg, $data) { die(json_encode(array("\143\x6f\x64\x65" => $code, "\x6d\x73\x67" => $msg, "\x64\x61\164\x61" => $data), 320 | JSON_PRETTY_PRINT)); } function isAdmin() { goto Tflty; bVXFV: if ($_GET["\x61\160\x69\153\x65\x79"] != '' && $_GET["\141\160\x69\153\145\x79"] == $apikey) { goto gktdw; } goto j7E26; j7E26: return false; goto g_So5; Tflty: session_start(); goto Z6H42; H3Hoq: return true; goto r8nag; r8nag: GRhQ0: goto gILmy; J8NxN: if ($_SESSION["\x6c\157\147\151\156"] == "\x61\144\155\151\x6e") { goto XfKW3; } goto bVXFV; JuK3i: XfKW3: goto H3Hoq; XlsuO: Bjgc0: goto bHBM1; gYBur: gktdw: goto RKNFF; Z6H42: $apikey = @(include __DIR__ . "\x2f\x2e\56\57\x43\157\x72\x65\57\x43\x6f\156\x66\151\x67\x2f\x61\x70\151\x6b\145\171\x2e\x70\150\x70"); goto J8NxN; RKNFF: return true; goto XlsuO; bHBM1: goto GRhQ0; goto JuK3i; g_So5: goto Bjgc0; goto gYBur; gILmy: } function clearAdmin() { goto mPqyl; AjTrG: goto O5Ws3; goto id_qd; xkvtn: O5Ws3: goto PdLzs; Z15NI: return false; goto AjTrG; Mjq5i: if ($_SESSION["\154\x6f\147\151\x6e"] == "\x61\144\x6d\151\156") { goto xKkXH; } goto Z15NI; faKOt: return true; goto xkvtn; mPqyl: session_start(); goto Mjq5i; id_qd: xKkXH: goto uM6vr; uM6vr: unset($_SESSION["\x6c\x6f\x67\x69\156"]); goto faKOt; PdLzs: } function alert($msg, $url) { goto v9LG0; rmt8T: $alert .= "\74\x2f\x73\143\162\x69\x70\x74\x3e"; goto UTsj2; d6kJO: $alert .= "\x77\151\x6e\x64\x6f\167\56\154\x6f\143\141\164\x69\x6f\x6e\56\x68\x72\145\146\75\x22" . $url . "\x22\x3b"; goto rmt8T; Z8S_p: $alert .= "\141\x6c\x65\x72\x74\x28\42" . $msg . "\42\x29\73"; goto d6kJO; v9LG0: $alert = "\74\163\x63\x72\x69\160\164\x3e"; goto Z8S_p; UTsj2: die($alert); goto HvA_A; HvA_A: } function jump($url) { header("\114\157\143\x61\x74\x69\x6f\156\x3a\40" . $url); } function addAccess() { goto qWd7R; dcI29: $time = $_SERVER["\x52\105\121\125\105\123\124\x5f\x54\111\x4d\x45"]; goto XKnkH; XKnkH: $result = $db->query("\x49\116\x53\105\122\124\40\x49\116\x54\117\x20\140\x6d\x78\147\x61\x70\151\137\x61\143\143\x65\163\163\x60\x28\140\x69\x64\140\x2c\x20\140\150\x6f\163\x74\140\54\x20\140\x75\x73\145\162\137\x61\147\145\x6e\x74\140\54\x20\x60\160\x72\x6f\x74\x6f\x63\157\154\140\x2c\40\140\155\145\164\150\157\144\140\x2c\40\140\x69\x70\x60\54\40\x60\x74\151\x6d\x65\140\51\x20\x56\x41\x4c\125\105\x53\40\x28\x4e\x55\114\x4c\x2c\47{$host}\47\54\47{$user_agent}\x27\54\x27{$protocol}\47\x2c\x27{$method}\x27\54\47{$ip}\x27\54\x27{$time}\47\51\x3b"); goto l71mQ; x7oKF: return false; goto u8ssN; BmLY1: QUSCg: goto XiXUt; au5uV: $method = $_SERVER["\x52\x45\x51\125\105\x53\x54\137\115\105\124\110\117\x44"]; goto IiGEh; W7YUU: $user_agent = $_SERVER["\x48\x54\124\120\137\125\x53\x45\122\x5f\101\107\x45\116\x54"]; goto F8J9G; XiXUt: return true; goto xyK4J; xyK4J: tp7J8: goto wTv51; l71mQ: if ($result) { goto QUSCg; } goto x7oKF; F7aMc: $host = $_SERVER["\x48\x54\124\120\x5f\x48\117\123\124"] . $_SERVER["\123\103\x52\x49\120\124\x5f\116\101\x4d\105"] . "\x3f" . $_SERVER["\121\125\x45\x52\131\x5f\x53\x54\122\111\x4e\107"]; goto W7YUU; u8ssN: goto tp7J8; goto BmLY1; IiGEh: $ip = $_SERVER["\122\105\115\x4f\x54\105\x5f\x41\x44\x44\x52"]; goto dcI29; F8J9G: $protocol = $_SERVER["\x53\105\122\x56\105\122\x5f\120\122\117\x54\117\x43\117\114"]; goto au5uV; qWd7R: require __CORE_DIR__ . "\x2f\104\141\x74\x61\142\x61\x73\145\x2f\143\x6f\156\156\x65\143\x74\x2e\160\150\160"; goto F7aMc; wTv51: } function checkEmail($email) { goto rj0yv; p1RXy: lJZkN: goto QAVVq; rt8eo: return true; goto p1RXy; ftrcC: return false; goto SGdqa; fcWLR: Keghh: goto rt8eo; SGdqa: goto lJZkN; goto fcWLR; o71Q5: if (filter_var($result, FILTER_VALIDATE_EMAIL)) { goto Keghh; } goto ftrcC; rj0yv: $result = trim($email); goto o71Q5; QAVVq: } use PHPMailer\PHPMailer\PHPMailer; use PHPMailer\PHPMailer\SMTP; use PHPMailer\PHPMailer\Exception; goto KC9vh; VoZmX: function is_spider() { goto P4273; kRM1Y: $agent = strtolower($_SERVER["\110\x54\x54\120\x5f\125\x53\105\x52\x5f\101\107\105\116\x54"]); goto niJ29; xXmnx: Yh8oG: goto irEOf; IzWEd: foreach ($spiderSite as $val) { goto FU1hu; prtw3: if (!$result) { goto ld4dR; } goto t4iu5; JsdtE: ld4dR: goto jwYBr; FU1hu: $str = strtolower($val); goto hZHwc; jwYBr: return false; goto utuqS; N8vMH: $result = $db->query($sql); goto prtw3; EHihv: vSEky: goto tz2Sw; lgRMx: $sql = "\x49\x4e\x53\x45\x52\124\x20\111\116\x54\x4f\x20\x60\x6d\x78\147\141\160\x69\x5f\x73\x70\x69\144\145\162\x60\x20\x28\x60\x69\x64\x60\x2c\x20\x60\x61\x67\x65\x6e\164\140\x2c\x20\x60\x69\x70\140\x2c\40\140\x74\x69\155\x65\x60\x29\x20\126\101\114\125\105\x53\x20\x28\116\125\114\114\54\x20\47{$str}\x27\54\x20\47" . getUserIp() . "\47\54\x20\47" . time() . "\47\51\x3b"; goto N8vMH; hZHwc: if (!(strpos($agent, $str) !== false)) { goto jTG8R; } goto lgRMx; utuqS: jTG8R: goto EHihv; t4iu5: return true; goto JsdtE; tz2Sw: } goto xXmnx; SonFf: tUiWQ: goto wHrrp; L8nij: goto tUiWQ; goto XfCkM; IZAYt: return false; goto L8nij; XfCkM: EF4vg: goto AlJ7w; irEOf: return false; goto SonFf; P4273: require __CORE_DIR__ . "\57\x44\x61\164\141\x62\141\x73\145\57\143\x6f\x6e\x6e\x65\x63\164\x2e\x70\150\x70"; goto kRM1Y; AlJ7w: $spiderSite = array("\124\145\156\143\x65\x6e\x74\124\x72\x61\166\x65\x6c\145\162", "\102\x61\x69\144\x75\163\x70\151\144\145\162\53", "\102\x61\x69\x64\165\107\141\x6d\x65", "\107\x6f\x6f\147\x6c\x65\x62\157\x74", "\155\x73\x6e\x62\157\x74", "\x53\157\x73\x6f\163\x70\x69\x64\145\162\x2b", "\x53\157\147\157\x75\x20\x77\145\x62\40\x73\x70\x69\144\x65\162", "\151\141\x5f\141\162\143\x68\151\166\x65\x72", "\131\x61\150\157\x6f\41\x20\x53\x6c\165\162\x70", "\x59\x6f\x75\144\x61\157\x42\x6f\164", "\131\x61\150\x6f\157\x20\123\x6c\165\x72\x70", "\115\x53\x4e\x42\157\164", "\112\141\166\141\40\50\x4f\x66\x74\145\156\x20\163\160\141\155\40\142\157\x74\51", "\x42\141\x69\x44\x75\123\x70\x69\x64\x65\x72", "\x56\x6f\x69\x6c\141", "\x59\141\x6e\144\145\x78\x20\x62\157\x74", "\x42\123\160\151\144\145\x72", "\164\167\151\143\x65\154\145\x72", "\x53\x6f\x67\x6f\165\40\123\x70\151\x64\145\x72", "\x53\x70\x65\145\144\x79\40\x53\160\x69\144\145\x72", "\107\x6f\x6f\x67\154\145\x20\101\x64\x53\x65\156\x73\145", "\110\x65\x72\x69\164\x72\151\170", "\120\x79\x74\150\x6f\x6e\55\x75\162\x6c\154\151\x62", "\x41\x6c\145\170\141\x20\x28\x49\101\40\101\162\x63\150\151\x76\x65\x72\x29", "\101\163\153", "\105\x78\x61\142\157\164", "\x43\165\163\x74\x6f", "\117\x75\x74\x66\157\170\x42\x6f\x74\57\131\x6f\x64\x61\157\102\157\164", "\171\141\143\171", "\123\x75\x72\166\x65\171\102\x6f\164", "\x6c\145\x67\163", "\x6c\167\160\55\x74\x72\x69\166\x69\141\x6c", "\116\x75\164\143\150", "\123\x74\141\x63\153\x52\141\155\142\154\x65\162", "\x54\x68\x65\x20\x77\145\142\x20\x61\x72\x63\x68\x69\166\145\x20\x28\x49\x41\x20\x41\x72\x63\150\151\x76\x65\x72\x29", "\x50\x65\162\x6c\40\164\157\x6f\154", "\x4d\112\61\x32\x62\x6f\164", "\x4e\x65\164\143\x72\141\146\x74", "\x4d\123\111\x45\x43\162\x61\167\154\145\x72", "\127\107\145\164\x20\164\x6f\x6f\154\x73", "\154\141\x72\x62\x69\x6e", "\x46\151\163\x68\40\163\x65\x61\x72\143\150"); goto IzWEd; niJ29: if (!empty($agent)) { goto EF4vg; } goto IZAYt; wHrrp: } goto Vm95e; KC9vh: function sendMail($to, $title, $content) { goto wi9MR; tRg0K: $mail->Host = $result["\x73\155\164\160\x5f\x68\157\163\164"]; goto hOv7Y; BgITB: $code = 0; goto AOuCF; V_3AI: gd28y: goto PJ9MS; lpXBA: if ($result = $result->fetch_assoc()) { goto gd28y; } goto sgM2c; hOv7Y: $mail->Username = $result["\x73\x6d\164\x70\x5f\165\x73\145\162\x6e\141\x6d\x65"]; goto ymvGG; LSkXn: YeEbC: goto WD35v; ymvGG: $mail->Password = $result["\163\x6d\x74\160\137\x70\141\163\163\x77\157\x72\144"]; goto Z8nEG; zLRum: $mail->CharSet = "\x75\x74\146\55\x38"; goto pg_Rf; Yqxyh: $mail->setFrom($result["\163\x6d\x74\x70\x5f\x75\163\145\x72\x6e\141\x6d\145"], $result["\x74\x69\164\x6c\x65"]); goto FKfR5; wi9MR: require "\56\56\57\x43\x6f\162\x65\57\104\x61\164\x61\x62\x61\x73\145\x2f\x63\x6f\x6e\156\145\x63\164\x2e\160\x68\x70"; goto R84qZ; llg2f: $mail->Port = $result["\x73\x6d\164\160\137\x70\x6f\x72\x74"]; goto Yqxyh; Ihttz: flJ6D: goto Asm3f; alMjV: $mail->WordWrap = 50; goto GCDpt; ByyIK: $result = $db->query($sql); goto lpXBA; Z8nEG: $mail->SMTPSecure = $result["\163\x6d\164\160\x5f\163\145\143\x75\162\x65"]; goto llg2f; nNQKB: goto gJDBE; goto V_3AI; Asm3f: $code = -1; goto zsD87; Z33XX: return $output; goto Bu43P; W2_8c: $mail->Body = "\12\x20\40\x20\x20\40\x20\x20\40\11\74\144\x69\166\40\163\164\x79\x6c\x65\75\42\142\141\x63\153\x67\x72\x6f\x75\x6e\x64\55\x63\157\154\157\162\72\x23\64\x34\x38\x41\106\106\73\x63\x6f\x6c\x6f\162\72\43\x34\64\70\x41\x46\106\73\x70\141\x64\x64\x69\156\x67\72\x31\x35\x70\x78\73\42\x3e\12\x20\40\40\x20\x20\x20\x20\40\11\11\x3c\x70\x20\x73\164\x79\154\x65\x3d\x22\146\157\156\164\55\167\145\151\147\150\164\72\x62\x6f\x6c\x64\x3b\143\157\154\x6f\162\72\x23\x66\x66\x66\73\x66\157\x6e\164\x2d\x73\x69\x7a\145\x3a\62\60\160\170\x3b\164\x65\x78\164\x2d\141\154\x69\x67\x6e\72\143\x65\x6e\x74\145\x72\x3b\x22\76" . addslashes($result["\164\151\164\x6c\145"]) . "\x3c\57\x70\76\12\x20\40\x20\x20\40\x20\40\x20\x9\74\57\144\x69\166\76\xa\40\40\x20\x20\x20\x20\40\40\11\x3c\144\151\166\40\163\x74\x79\x6c\x65\75\x22\142\141\x63\x6b\147\162\157\x75\156\144\55\x63\x6f\x6c\157\162\72\x23\146\x66\x66\73\160\x61\144\x64\x69\156\147\72\61\60\x70\x78\73\142\157\x72\x64\145\162\72\x32\x70\170\x20\163\x6f\x6c\x69\144\x20\x23\64\64\70\x41\106\x46\73\42\x3e\xa\40\40\40\x20\40\x20\x20\40\11\11\x3c\160\40\163\x74\171\x6c\145\75\42\143\x6f\x6c\x6f\x72\72\x23\60\x30\60\x3b\x66\157\156\x74\x2d\x73\151\172\x65\x3a\x31\x35\x70\x78\x3b\42\76" . $content . "\x3c\x2f\x70\x3e\xa\40\x20\40\40\x20\40\40\40\x9\x9\x3c\x70\x20\163\164\x79\x6c\x65\x3d\x22\x63\x6f\154\x6f\162\x3a\x23\x30\60\60\x3b\x66\157\x6e\x74\55\x73\151\x7a\145\x3a\61\65\x70\x78\73\164\145\170\x74\55\x61\154\x69\x67\x6e\72\x63\145\156\x74\x65\162\73\x22\76" . date("\x59\x2d\155\55\144") . "\x26\x6e\142\x73\160\73" . date("\x68\x3a\151\x3a\163") . "\x3c\x2f\x70\x3e\12\x20\40\x20\40\40\40\x20\x20\11\x3c\57\144\151\x76\x3e\12\x20\40\40\40\x20\x20\40\40"; goto z3YIR; zeQnd: $msg = "\350\216\267\345\217\x96\xe9\x82\256\xe4\273\266\351\205\215\347\xbd\256\xe4\277\xa1\346\201\xaf\xe6\227\xb6\345\x8f\221\347\224\x9f\351\x94\x99\350\xaf\257"; goto nNQKB; sgM2c: $code = -1; goto zeQnd; pg_Rf: $mail->Subject = $title; goto W2_8c; zsD87: $msg = "\345\217\x91\xe9\x80\201\345\xa4\xb1\350\xb4\xa5\72\x20" . $mail->ErrorInfo; goto LSkXn; l2Umj: $output = json_encode(array("\x63\157\x64\145" => $code, "\155\163\x67" => $msg), 320); goto Z33XX; mDep_: $mail->SMTPAuth = true; goto tRg0K; GCDpt: $mail->IsHTML(true); goto zLRum; JUvnJ: goto YeEbC; goto Ihttz; txq6c: require "\x2e\56\57\111\x6e\x63\154\x75\x64\x65\57\120\110\120\x4d\x61\151\x6c\145\162\x2f\123\x4d\x54\x50\56\160\150\160"; goto lgxyl; RCKA_: require "\56\56\57\111\156\143\x6c\165\144\x65\x2f\x50\110\120\x4d\141\x69\x6c\145\162\57\120\x48\120\115\x61\x69\x6c\145\x72\x2e\x70\150\x70"; goto txq6c; lgxyl: $sql = "\x53\x45\x4c\105\103\x54\x20\x74\151\x74\154\x65\x2c\163\x6d\x74\x70\137\x68\x6f\163\164\54\163\155\x74\x70\x5f\x75\163\x65\x72\x6e\x61\155\x65\54\163\x6d\x74\160\x5f\160\141\x73\163\167\x6f\x72\x64\x2c\163\155\164\160\x5f\x70\157\x72\x74\x2c\163\x6d\x74\x70\x5f\163\x65\143\165\162\x65\x20\106\x52\117\x4d\40\x60\155\x78\147\x61\160\x69\137\143\157\156\x66\x69\x67\x60\x3b"; goto ByyIK; R84qZ: require "\x2e\x2e\57\x49\x6e\143\154\165\x64\x65\x2f\x50\x48\x50\115\141\151\x6c\145\x72\57\x45\170\143\x65\x70\x74\x69\157\x6e\x2e\x70\150\x70"; goto RCKA_; AOuCF: $msg = "\345\217\221\xe9\200\201\346\210\220\xe5\212\x9f"; goto JUvnJ; z3YIR: if (!$mail->send()) { goto flJ6D; } goto BgITB; PJ9MS: $mail = new PHPMailer(); goto Xj5DE; WD35v: gJDBE: goto l2Umj; FKfR5: $mail->addAddress($to); goto alMjV; Xj5DE: $mail->isSMTP(); goto mDep_; Bu43P: } goto ccDgK; bW_X1: function getUserIp() { goto LVTTa; FqitA: wU3F6: goto qiXjQ; gphrx: goto VSeF9; goto wUk7y; QbYkJ: foNe7: goto HXT5o; VKT2N: $ip = $ips[$i]; goto gphrx; T_gCR: Ij3Pl: goto Pj7xM; Pj7xM: $i++; goto NqYxg; FS2GI: $i = 0; goto QbYkJ; l5Xrs: $ip = FALSE; goto tF1CF; HXT5o: if (!($i < count($ips))) { goto VSeF9; } goto JpIOx; i1qEo: return $ip ? $ip : $_SERVER["\122\105\115\117\x54\105\137\x41\x44\104\122"]; goto mwgkH; gFzrC: smja_: goto i1qEo; ZVaN_: array_unshift($ips, $ip); goto l5Xrs; vQOJ2: if (!$ip) { goto gFIXc; } goto ZVaN_; qiXjQ: if (empty($_SERVER["\110\124\124\120\137\x58\137\x46\117\122\x57\x41\122\x44\x45\104\137\x46\x4f\x52"])) { goto smja_; } goto dduPG; fHwLL: if (empty($_SERVER["\110\124\124\x50\x5f\103\x4c\111\x45\116\124\x5f\111\x50"])) { goto wU3F6; } goto lkXf3; LVTTa: $ip = false; goto fHwLL; wUk7y: urepG: goto T_gCR; JpIOx: if (mb_eregi("\136\x28\61\60\xe2\224\x82\61\x37\62\56\x31\66\342\224\x82\61\x39\62\x2e\x31\x36\x38\x29\56", $ips[$i])) { goto urepG; } goto VKT2N; dduPG: $ips = explode("\x2c\40", $_SERVER["\110\x54\x54\120\x5f\x58\x5f\x46\x4f\x52\x57\101\x52\104\105\x44\137\106\x4f\122"]); goto vQOJ2; lkXf3: $ip = $_SERVER["\x48\124\x54\x50\x5f\x43\x4c\111\x45\116\124\x5f\111\x50"]; goto FqitA; NqYxg: goto foNe7; goto TA1Zx; tF1CF: gFIXc: goto FS2GI; TA1Zx: VSeF9: goto gFzrC; mwgkH: } goto VoZmX; lsU7_: function addApiAccess($id) { goto uyD9Q; NOBKp: xZkGx: goto r1FcT; ItcX0: $get_access = $get_access->fetch_assoc(); goto lK6zT; DXDkH: return false; goto hyVAD; XFrGt: $get_access = $db->query("\123\x45\114\x45\x43\x54\x20\x61\x63\143\145\163\163\40\106\x52\117\115\x20\140\155\x78\x67\x61\x70\x69\x5f\141\160\x69\x60\x20\127\110\x45\122\x45\40\x60\151\144\x60\x20\75\40\47{$id}\x27\73"); goto UBzr3; fgci9: if (intval($id)) { goto aj4Du; } goto DXDkH; fEuwU: goto z6zxJ; goto ySRJT; WjntM: return false; goto fEuwU; hyVAD: goto YLb36; goto ghO0s; UBzr3: if ($get_access) { goto IJTDC; } goto WjntM; r1FcT: z6zxJ: goto fer8D; BV5Gt: $update_result = $db->query("\x55\x50\104\101\x54\105\x20\140\x6d\170\147\141\x70\x69\x5f\x61\x70\x69\140\40\x53\x45\124\40\140\x61\x63\143\x65\163\x73\140\40\x3d\40\47{$update_access}\47\40\127\x48\105\x52\x45\40\140\151\144\x60\x20\75\x20\x27{$id}\47\x3b"); goto GYw6c; uyD9Q: require __CORE_DIR__ . "\x2f\x44\141\x74\x61\x62\141\163\x65\57\x63\x6f\156\x6e\x65\143\x74\56\160\x68\x70"; goto fgci9; ySRJT: IJTDC: goto ItcX0; aGpCr: return true; goto NOBKp; UTGwH: AvVIM: goto aGpCr; lK6zT: $update_access = $get_access["\141\x63\143\x65\163\x73"] + 1; goto BV5Gt; GYw6c: if ($update_result) { goto AvVIM; } goto Dzo3Q; fer8D: YLb36: goto Emv8S; ghO0s: aj4Du: goto XFrGt; Dzo3Q: return false; goto xeUJV; xeUJV: goto xZkGx; goto UTGwH; Emv8S: } goto bW_X1; ccDgK: function domainAuth($domain) { goto NquNW; PpGmo: $data = json_decode($data, true); goto tWsPj; tWsPj: $code = $data["\143\x6f\x64\145"]; goto fk92g; NquNW: if (!$domain) { goto Z3jps; } goto SC494; xHyt4: return true; goto zNh3P; SC494: $url = "\150\x74\164\x70\x3a\57\x2f\x61\x75\164\x68\56\155\165\x78\151\165\147\x65\56\143\156\72\71\x39\71\x2f\141\160\x69\x2f\x71\x75\x65\162\x79\77\x73\x65\170\x3d\144\x6f\155\x61\x69\156\x26\x6b\145\171\167\157\162\x64\75"; goto YoqSx; fk92g: if ($code == 1) { goto x53Z_; } goto k3NHQ; k3NHQ: return false; goto tAa2H; YoqSx: $data = curl($url . $domain, "\107\105\x54", 0, 0); goto PpGmo; tAa2H: goto U5Kz3; goto nnI2d; zNh3P: U5Kz3: goto yibHE; yibHE: Z3jps: goto T0de1; nnI2d: x53Z_: goto xHyt4; T0de1: } goto lsU7_; Vm95e: function curl($url, $method, $headers, $params) { goto tt9Uj; jUdhd: iZKP9: goto Tus__; RC33x: o5NLQ: goto jUdhd; DCeUb: curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); goto lMARG; M1eIh: curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); goto C1xuY; rRZ3A: A1R0H: goto tci2n; lQVzS: goto XeMym; goto QpNE1; jwGQP: curl_setopt($ch, CURLOPT_VERBOSE, 1); goto aYYIg; C6pwo: goto A1R0H; goto WUcSX; Jg0fd: switch ($method) { case "\x47\105\124": curl_setopt($ch, CURLOPT_HTTPGET, 1); goto iZKP9; case "\120\117\x53\x54": goto j9hgz; j9hgz: curl_setopt($ch, CURLOPT_POST, 1); goto hrHI9; hrHI9: curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString); goto BPdtq; BPdtq: goto iZKP9; goto SIFv0; SIFv0: case "\x50\x55\124": goto cO_Zk; cO_Zk: curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "\x50\125\x54"); goto xLjzj; xLjzj: curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString); goto oVaGs; oVaGs: goto iZKP9; goto ecXWd; ecXWd: case "\104\105\x4c\x45\124\x45": goto jTlzC; jTlzC: curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "\x44\105\x4c\x45\124\x45"); goto uE5vs; BBySR: goto iZKP9; goto VtsAl; uE5vs: curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString); goto BBySR; VtsAl: } goto RC33x; Hz4I1: curl_close($ch); goto yAJP_; QpNE1: VsqSo: goto f9U4P; GD6JA: return array("\105\x72\162\157\162" => "\xe8\xaf\267\xe6\xb1\202\xe9\224\231\xe8\xaf\257"); goto bDqyI; UIuEG: $requestString = $params ?: ''; goto lQVzS; pAHk3: if (!is_array($headers)) { goto jEwUU; } goto ClVB9; MqcAd: XeMym: goto KHt69; OFEov: $headers = array("\103\x6f\156\x74\145\156\164\x2d\x74\171\x70\145\72\x20\x74\145\x78\164\57\152\163\x6f\x6e"); goto C6pwo; wpVOL: parse_str($headers, $headers); goto rRZ3A; aYYIg: curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); goto DCeUb; yAJP_: if (!(stristr($response, "\110\124\x54\x50\40\x34\60\64") || $response == '')) { goto Ie910; } goto GD6JA; bDqyI: Ie910: goto hNkID; rN8Xi: curl_setopt($ch, CURLOPT_URL, $url); goto jwGQP; ClVB9: goto A1R0H; goto fAScd; tci2n: $ch = curl_init(); goto rN8Xi; fAScd: mPZ0Z: goto OFEov; hNkID: return $response; goto ywcCv; WUcSX: jEwUU: goto wpVOL; KHt69: if (empty($headers)) { goto mPZ0Z; } goto pAHk3; lMARG: curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); goto M1eIh; C1xuY: curl_setopt($ch, CURLOPT_POST, 1); goto Jg0fd; f9U4P: $requestString = http_build_query($params); goto MqcAd; Tus__: $response = curl_exec($ch); goto Hz4I1; tt9Uj: if (is_array($params)) { goto VsqSo; } goto UIuEG; ywcCv: }
+ * 抛出JSON格式错误码
+ * @param int $code 状态码
+ * @param string $msg 状态信息
+ */
+function jsonError($code, $msg)
+{
+	die(json_encode(array(
+		'code' => $code,
+		'msg' => $msg
+	), 320 | JSON_PRETTY_PRINT));
+}
+
+/*
+ * 数组转JSON
+ * @param int $code 状态码
+ * @param string $msg 状态信息
+ * @param string/array $data 数据
+ */
+function json($code, $msg, $data)
+{
+	die(json_encode(array(
+		'code' => $code,
+		'msg' => $msg,
+		'data' => $data
+	), 320 | JSON_PRETTY_PRINT));
+}
+
+/*
+ * 判断用户是否登录到后台
+ *	@return bool 是否登录
+ */
+function isAdmin()
+{
+	session_start();
+	$apikey = @include __DIR__ . '/../Core/Config/apikey.php';
+	if ($_SESSION['login'] == 'admin') {
+		return true;
+	} else if($_GET['apikey'] != '' && $_GET['apikey'] == $apikey) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/*
+ * 清除登录session（退出登录）
+ *	@return bool 清除是否成功
+ */
+function clearAdmin()
+{
+	session_start();
+	if ($_SESSION['login'] == 'admin') {
+		unset($_SESSION['login']);
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/*
+ * 跳转并带有提示信息
+ * @param string $msg 提示信息
+ * @param string $url 跳转链接
+ */
+function alert($msg, $url)
+{
+	$alert = '<script>';
+	$alert .= 'alert("' . $msg . '");';
+	$alert .= 'window.location.href="' . $url . '";';
+	$alert .= '</script>';
+	die($alert);
+}
+
+/*
+ * 跳转到某一链接
+ * @param string  $url 链接
+ */
+function jump($url)
+{
+	header('Location: ' . $url);
+}
+
+/*
+ * 添加访问记录
+ * @return bool 添加是否成功
+ */
+function addAccess()
+{
+	require __CORE_DIR__ . '/Database/connect.php';
+
+	$host = $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"] . '?' . $_SERVER['QUERY_STRING'];
+	$user_agent = $_SERVER["HTTP_USER_AGENT"];
+	$protocol = $_SERVER["SERVER_PROTOCOL"];
+	$method = $_SERVER["REQUEST_METHOD"];
+	$ip = $_SERVER["REMOTE_ADDR"];
+	$time = $_SERVER["REQUEST_TIME"];
+	$result = $db->query("INSERT INTO `mxgapi_access`(`id`, `host`, `user_agent`, `protocol`, `method`, `ip`, `time`) VALUES (NULL,'{$host}','{$user_agent}','{$protocol}','{$method}','{$ip}','{$time}');");
+	if ($result) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/*
+ * 检查字符串是否为邮箱
+ * @param string $email
+ * @return bool
+ */
+function checkEmail($email)
+{
+	$result = trim($email);
+	if (filter_var($result, FILTER_VALIDATE_EMAIL)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/*
+ * 发送邮件方法
+ * @param $to：接收者 $title：标题 $content：邮件内容
+ * @return bool true:发送成功 false:发送失败
+ */
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+function sendMail($to, $title, $content)
+{
+	require '../Core/Database/connect.php';
+	require '../Include/PHPMailer/Exception.php';
+	require '../Include/PHPMailer/PHPMailer.php';
+	require '../Include/PHPMailer/SMTP.php';
+	$sql = "SELECT title,smtp_host,smtp_username,smtp_password,smtp_port,smtp_secure FROM `mxgapi_config`;";
+	$result = $db->query($sql);
+	if ($result = $result->fetch_assoc()) {
+		$mail = new PHPMailer();
+		$mail->isSMTP();
+		$mail->SMTPAuth = true;
+		$mail->Host = $result['smtp_host'];
+		$mail->Username = $result['smtp_username'];
+		$mail->Password = $result['smtp_password'];
+		$mail->SMTPSecure = $result['smtp_secure'];
+		$mail->Port = $result['smtp_port'];
+		$mail->setFrom($result['smtp_username'], $result['title']);
+		$mail->addAddress($to);
+		$mail->WordWrap = 50;
+		$mail->IsHTML(true);
+		$mail->CharSet = "utf-8";
+		$mail->Subject = $title;
+		$mail->Body = '
+        	<div style="background-color:#448AFF;color:#448AFF;padding:15px;">
+        		<p style="font-weight:bold;color:#fff;font-size:20px;text-align:center;">' . addslashes($result['title']) . '</p>
+        	</div>
+        	<div style="background-color:#fff;padding:10px;border:2px solid #448AFF;">
+        		<p style="color:#000;font-size:15px;">' . $content . '</p>
+        		<p style="color:#000;font-size:15px;text-align:center;">' . date('Y-m-d') . '&nbsp;' . date('h:i:s') . '</p>
+        	</div>
+        ';
+		if (!$mail->send()) {
+			$code = -1;
+			$msg = '发送失败: ' . $mail->ErrorInfo;
+		} else {
+			$code = 0;
+			$msg = '发送成功';
+		}
+	} else {
+		$code = -1;
+		$msg = '获取邮件配置信息时发生错误';
+	}
+	$output = json_encode(array(
+		'code' => $code,
+		'msg' => $msg
+	), 320);
+	return $output;
+}
+
+/*
+ * 检测域名是否授权
+ * @param $domain string 域名
+ * @return bool true授权，false未授权
+ */
+function domainAuth($domain)
+{
+    return true;
+}
+
+/* 
+ * 添加接口统计函数
+ * @param int $id 接口id
+ * @return bool 添加成功为true，失败则为false
+ */
+function addApiAccess($id)
+{
+	require __CORE_DIR__ . '/Database/connect.php';
+	if (intval($id)) {
+		$get_access = $db->query("SELECT access FROM `mxgapi_api` WHERE `id` = '{$id}';");
+		if ($get_access) {
+			$get_access = $get_access->fetch_assoc();
+			$update_access = $get_access['access'] + 1;
+			$update_result = $db->query("UPDATE `mxgapi_api` SET `access` = '{$update_access}' WHERE `id` = '{$id}';");
+			if ($update_result) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+}
+
+/*
+ * 获取用户的真实ip
+ * @return string 用户IP
+ */
+function getUserIp()
+{
+	$ip = false;
+	if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+		$ip = $_SERVER["HTTP_CLIENT_IP"];
+	}
+	if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		$ips = explode(", ", $_SERVER['HTTP_X_FORWARDED_FOR']);
+		if ($ip) {
+			array_unshift($ips, $ip);
+			$ip = FALSE;
+		}
+		for ($i = 0; $i < count($ips); $i++) {
+			if (!mb_eregi("^(10│172.16│192.168).", $ips[$i])) {
+				$ip = $ips[$i];
+				break;
+			}
+		}
+	}
+	return ($ip ? $ip : $_SERVER['REMOTE_ADDR']);
+}
+
+/*
+ * 通过ua判断是否为搜索引擎蜘蛛
+ * @name is_spider()
+ * @return bool
+ */
+function is_spider()
+{
+	require __CORE_DIR__ . '/Database/connect.php';
+	$agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if (!empty($agent)) {
+		$spiderSite = array(
+			"TencentTraveler",
+			"Baiduspider+",
+			"BaiduGame",
+			"Googlebot",
+			"msnbot",
+			"Sosospider+",
+			"Sogou web spider",
+			"ia_archiver",
+			"Yahoo! Slurp",
+			"YoudaoBot",
+			"Yahoo Slurp",
+			"MSNBot",
+			"Java (Often spam bot)",
+			"BaiDuSpider",
+			"Voila",
+			"Yandex bot",
+			"BSpider",
+			"twiceler",
+			"Sogou Spider",
+			"Speedy Spider",
+			"Google AdSense",
+			"Heritrix",
+			"Python-urllib",
+			"Alexa (IA Archiver)",
+			"Ask",
+			"Exabot",
+			"Custo",
+			"OutfoxBot/YodaoBot",
+			"yacy",
+			"SurveyBot",
+			"legs",
+			"lwp-trivial",
+			"Nutch",
+			"StackRambler",
+			"The web archive (IA Archiver)",
+			"Perl tool",
+			"MJ12bot",
+			"Netcraft",
+			"MSIECrawler",
+			"WGet tools",
+			"larbin",
+			"Fish search",
+		);
+		foreach ($spiderSite as $val) {
+			$str = strtolower($val);
+			if (strpos($agent, $str) !== false) {
+				$sql = "INSERT INTO `mxgapi_spider` (`id`, `agent`, `ip`, `time`) VALUES (NULL, '{$str}', '" . getUserIp() . "', '" . time() . "');";
+				$result = $db->query($sql);
+				if ($result) {
+					return true;
+				}
+				return false;
+			}
+		}
+		return false;
+	} else {
+		return false;
+	}
+}
+
+/*
+ * 封装Curl请求
+ * @param string $url 地址
+ * @param string $method 方法
+ * @param array $headers 头
+ * @param array $params 参数
+ */
+function curl($url, $method, $headers, $params)
+{
+	if (is_array($params)) {
+		$requestString = http_build_query($params);
+	} else {
+		$requestString = $params ?: '';
+	}
+	if (empty($headers)) {
+		$headers = array('Content-type: text/json');
+	} elseif (!is_array($headers)) {
+		parse_str($headers, $headers);
+	}
+	// setting the curl parameters.
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_VERBOSE, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	// turning off the server and peer verification(TrustManager Concept).
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	// setting the POST FIELD to curl
+	switch ($method) {
+		case "GET":
+			curl_setopt($ch, CURLOPT_HTTPGET, 1);
+			break;
+		case "POST":
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);
+			break;
+		case "PUT":
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);
+			break;
+		case "DELETE":
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);
+			break;
+	}
+	// getting response from server
+	$response = curl_exec($ch);
+
+	//close the connection
+	curl_close($ch);
+
+	//return the response
+	if (stristr($response, 'HTTP 404') || $response == '') {
+		return array('Error' => '请求错误');
+	}
+	return $response;
+}

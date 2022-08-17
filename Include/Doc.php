@@ -10,15 +10,10 @@ if(!$id){
 	addApiAccess($id);
 	// 根据ID查询接口是否是正常
 	$result = $db->query("SELECT name,status FROM `mxgapi_api` WHERE `id`='{$id}';")->fetch_assoc();
-	if(!$result){
-	    include __DIR__.'/404.php';
-    	    exit;
-	}else{
-    	    $status = $result['status'];
-    	    if($status == '0'){
-    		include __DIR__.'/error.php';
-    		exit;
-    	    }
+	$status = $result['status'];
+	if($status == '0'){
+		include __DIR__.'/error.php';
+		exit;
 	}
 }
 

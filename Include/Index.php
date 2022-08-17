@@ -1,5 +1,81 @@
 <?php
-/*
- Encode by www.phpen.cn 
-*/
- goto GyU3E; wCCv3: include __DIR__ . "\x2f\x44\x6f\x63\x2e\x70\x68\x70"; goto DYaEE; nMuex: include __INCLUDE_DIR__ . "\x2f\106\x69\x72\x65\167\x61\x6c\x6c\x2f\x43\103\x50\162\x6f\164\x65\x63\164\x2e\160\150\x70"; goto RMeQM; zwbtN: iTrAt: goto RzetJ; dGluV: if (!($action != "\x61\x64\155\x69\156" && $action != "\151\x6e\x73\164\x61\154\154")) { goto SCRVV; } goto IO4qX; QNtd9: is_spider(); goto fcJEV; HYhSZ: alert("\xe6\xa3\x80\xe6\265\x8b\345\x88\xb0\xe7\xb3\273\xe7\273\237\xe6\234\xaa\xe5\xae\211\350\243\x85\xef\xbc\214\350\xaf\xb7\xe5\x85\x88\345\256\211\350\xa3\205\xef\xbc\201", "\77\141\x63\x74\x69\157\x6e\x3d\x69\x6e\163\164\x61\x6c\154"); goto fXWt4; wPTd7: include __DIR__ . "\57\105\162\162\157\162\56\160\x68\x70"; goto iRcQr; JH8yN: include __TEMPLATE_DIR__ . "\57\110\x6f\x6d\x65\x2f\x6e\x6f\x74\x5f\141\x75\x74\x68\x2e\150\164\155\154"; goto mz42n; NOgkX: if ($action == "\152\165\x6d\160") { goto W8keZ; } goto HF6OD; JZ2Ab: if (domainAuth($_SERVER["\110\124\x54\x50\137\110\x4f\x53\124"])) { goto qOc_8; } goto JH8yN; m5CIK: goto vd8rt; goto TYnGW; BEiZR: mcMvI: goto NbzQX; GCYVC: gnePZ: goto wPTd7; YbkMj: if (!($config["\143\154\157\163\145\x5f\163\x69\x74\145"] == "\x31" && $action != "\x61\144\x6d\151\x6e")) { goto P5COT; } goto k3CTZ; GfUEK: include __DIR__ . "\x2f\106\x72\151\x65\156\x64\154\151\156\153\x73\x2e\x70\x68\x70"; goto fyUMc; Q_xqS: if (!($config["\143\x63\137\x70\162\157\164\145\143\164"] == "\61" && $action != "\x61\x64\x6d\151\x6e")) { goto TUDGT; } goto nMuex; Wav7e: exit; goto uukZM; PLxQh: Vc8Fk: goto ZTNJE; mz42n: exit; goto L_imK; SUKCv: include __DIR__ . "\57\x4a\x75\x6d\160\x2e\x70\x68\160"; goto XguMV; rSklE: include __INCLUDE_DIR__ . "\57\x46\x69\162\145\167\141\x6c\x6c\x2f\104\x69\x73\123\x51\114\x2e\x70\150\x70"; goto Yq61g; t0Cy7: PG55X: goto Fg1_Y; uukZM: P5COT: goto Q_xqS; vWLet: if (!($config["\x66\151\162\x65\137\167\141\x6c\x6c"] == "\61" && $action != "\x61\144\x6d\x69\156")) { goto AoxdL; } goto rSklE; SchkO: if ($action == "\x66\x72\151\x65\156\x64\x6c\151\x6e\153\163") { goto EVM_I; } goto Gf4kM; GyU3E: error_reporting(E_ERROR); goto JZ2Ab; zUuim: W8keZ: goto SUKCv; fXWt4: SJ_kW: goto dGluV; sbIkn: goto tWTt2; goto zUuim; Gf4kM: if ($action == "\141\x62\157\x75\x74") { goto Y89TK; } goto gF0fq; mZE_V: Y89TK: goto bizYx; gd3iR: include __DIR__ . "\57\110\x6f\155\145\56\160\150\x70"; goto CrcCs; fcJEV: SCRVV: goto YbkMj; NbzQX: include __DIR__ . "\57\x49\156\163\164\141\154\x6c\56\160\x68\x70"; goto zwbtN; RzetJ: goto PG55X; goto mZE_V; IO4qX: addAccess(); goto QNtd9; K3Rcz: goto iTrAt; goto BEiZR; QCdtF: include __DIR__ . "\57\101\x64\155\151\156\x2e\160\x68\x70"; goto UYhqr; lhgec: goto fC3Mv; goto PLxQh; TYnGW: WE2EX: goto wCCv3; hu2uR: $action = $_GET["\x61\143\164\x69\157\x6e"]; goto vzn67; DHblX: if ($action == "\x64\157\143") { goto WE2EX; } goto SchkO; qXEf2: EVM_I: goto GfUEK; SDfkT: ebPYA: goto QCdtF; I0KSU: goto rbMQO; goto GCYVC; UYhqr: S0wU1: goto I0KSU; bizYx: include __DIR__ . "\57\x41\x62\157\x75\x74\56\160\150\160"; goto t0Cy7; GpNSr: if ($action == "\145\162\x72\x6f\x72") { goto gnePZ; } goto nuF6n; CrcCs: goto S0wU1; goto SDfkT; RMeQM: TUDGT: goto vWLet; gF0fq: if ($action == "\151\x6e\x73\164\x61\x6c\x6c") { goto mcMvI; } goto NOgkX; L_imK: qOc_8: goto hu2uR; HF6OD: if ($action == "\64\x30\64") { goto Vc8Fk; } goto GpNSr; vzn67: if (!(!file_exists(__CORE_DIR__ . "\57\x69\156\163\164\x61\154\154\56\154\157\143\x6b") && $action != "\x69\156\x73\x74\141\x6c\x6c")) { goto SJ_kW; } goto HYhSZ; fyUMc: HPUxe: goto m5CIK; XguMV: tWTt2: goto K3Rcz; Fg1_Y: goto HPUxe; goto qXEf2; nuF6n: if ($action == "\141\144\x6d\x69\156") { goto ebPYA; } goto gd3iR; Yq61g: AoxdL: goto DHblX; ZTNJE: include __DIR__ . "\57\64\60\64\x2e\x70\150\160"; goto hQ2Xm; k3CTZ: include __TEMPLATE_DIR__ . "\57\x48\x6f\x6d\x65\x2f\x63\x6c\x6f\x73\x65\56\150\164\x6d\154"; goto Wav7e; hQ2Xm: fC3Mv: goto sbIkn; iRcQr: rbMQO: goto lhgec; DYaEE: vd8rt:
+error_reporting(E_ERROR);
+
+// 获取行为GET参数
+$action = $_GET['action'];
+
+// 检测系统是否安装
+if(!file_exists(__CORE_DIR__.'/install.lock') && $action != 'install'){
+	alert('检测到系统未安装，请先安装！','?action=install');
+}
+
+if ($action != 'admin' && $action != 'install') {
+	addAccess(); // 调用统计访问
+	is_spider(); // 调用统计蜘蛛
+}
+
+// 检测站点是否维护中
+if($config['close_site'] == '1' && $action != 'admin'){
+	include __TEMPLATE_DIR__.'/Home/close.html';
+	exit;
+}
+
+// 检测站点是否开启防CC功能
+if($config['cc_protect'] == '1' && $action != 'admin'){
+	include __INCLUDE_DIR__.'/Firewall/CCProtect.php';
+}
+
+// 检测站点是否开启防SQL注入功能
+if($config['fire_wall'] == '1' && $action != 'admin'){
+	include __INCLUDE_DIR__.'/Firewall/DisSQL.php';
+}
+
+
+
+// 行为初始化
+if($action == 'doc'){
+	
+	/* 加载文档页面 */
+	include __DIR__.'/Doc.php';
+	
+}else if($action == 'friendlinks'){
+	
+	/* 加载友链页面 */
+	include __DIR__.'/Friendlinks.php';
+	
+}else if($action == 'about'){
+	
+	/* 加载关于页面 */
+	include __DIR__.'/About.php';
+	
+}else if($action == 'install'){
+	
+	/* 加载安装页面 */
+	include __DIR__.'/Install.php';
+	
+}else if($action == 'jump'){
+	
+	/* 加载跳转页面 */
+	include __DIR__.'/Jump.php';
+	
+}else if($action == '404'){
+	
+	/* 加载404页面 */
+	include __DIR__.'/404.php';
+	
+}else if($action == 'error'){
+	
+	/* 加载接口维护页面 */
+	include __DIR__.'/Error.php';
+	
+}else if($action == 'admin'){
+	
+	/* 加载后台页面 */
+	include __DIR__.'/Admin.php';
+	
+}else{
+
+	/* 加载首页 */
+	include __DIR__.'/Home.php';
+	
+}
